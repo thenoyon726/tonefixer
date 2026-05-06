@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToneFixer - AI Tone Rewriter | Rewrite Any Text Professionally</title>
+<meta name="description" content="Fix the tone of any text instantly using AI. Make your emails, messages and documents sound professional, friendly, formal or casual in seconds.">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8fafc;color:#1e293b;line-height:1.6}
+  a{text-decoration:none;color:inherit}
+  nav{background:#fff;border-bottom:1px solid #e2e8f0;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .logo{font-size:20px;font-weight:700;color:#059669;display:flex;align-items:center;gap:8px}
+  .logo span{font-size:22px}
+  .nav-links{display:flex;align-items:center;gap:24px}
+  .nav-links a{font-size:14px;color:#64748b;transition:color .2s}
+  .nav-links a:hover{color:#059669}
+  .nav-cta{background:#059669;color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:500;font-size:14px}
+  .nav-cta:hover{background:#047857!important}
+  .hero{background:linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%);padding:60px 24px;text-align:center}
+  .hero h1{font-size:clamp(28px,5vw,48px);font-weight:800;color:#064e3b;margin-bottom:16px;line-height:1.2}
+  .hero h1 span{color:#059669}
+  .hero p{font-size:18px;color:#065f46;max-width:560px;margin:0 auto 32px}
+  .stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
+  .stat{text-align:center}
+  .stat-num{font-size:28px;font-weight:700;color:#059669}
+  .stat-label{font-size:13px;color:#065f46}
+  .main{max-width:900px;margin:0 auto;padding:40px 24px}
+  .tool-card{background:#fff;border-radius:16px;border:1px solid #e2e8f0;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+  .tool-header{background:#059669;padding:20px 24px;display:flex;align-items:center;gap:12px}
+  .tool-header h2{color:#fff;font-size:18px;font-weight:600}
+  .tool-header p{color:#a7f3d0;font-size:13px;margin-top:2px}
+  .tool-body{padding:24px}
+  .tone-label{font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+  .tone-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .tone-btn{padding:8px 18px;border-radius:999px;border:1.5px solid #e2e8f0;background:#fff;color:#64748b;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+  .tone-btn:hover{border-color:#059669;color:#059669}
+  .tone-btn.active{background:#059669;border-color:#059669;color:#fff}
+  .tone-desc{font-size:12px;color:#64748b;margin-bottom:16px;min-height:18px}
+  .boxes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:600px){.boxes{grid-template-columns:1fr}.nav-links{display:none}}
+  .box-wrap{display:flex;flex-direction:column}
+  .box-label{font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  textarea{width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:14px;font-size:14px;color:#1e293b;font-family:inherit;resize:vertical;min-height:160px;outline:none;transition:border .2s;background:#f8fafc}
+  textarea:focus{border-color:#059669;background:#fff}
+  .output-box{background:#f0fdf4;border:1.5px solid #a7f3d0;border-radius:10px;padding:14px;min-height:160px;font-size:14px;color:#1e293b;line-height:1.7;white-space:pre-wrap}
+  .output-placeholder{color:#94a3b8;font-style:italic;font-size:13px}
+  .btn-row{display:flex;align-items:center;gap:12px;margin:16px 0}
+  .fix-btn{display:flex;align-items:center;gap:8px;padding:12px 28px;background:#059669;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s}
+  .fix-btn:hover{background:#047857;transform:translateY(-1px)}
+  .fix-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+  .copy-btn{display:flex;align-items:center;gap:6px;padding:10px 18px;background:#fff;color:#059669;border:1.5px solid #059669;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+  .copy-btn:hover{background:#ecfdf5}
+  .examples{margin-top:8px}
+  .ex-label{font-size:12px;color:#64748b;margin-bottom:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-size:12px;padding:5px 12px;border-radius:999px;border:1px solid #e2e8f0;background:#fff;color:#64748b;cursor:pointer;transition:all .2s}
+  .chip:hover{border-color:#059669;color:#059669;background:#ecfdf5}
+  .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ad-banner{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:12px 16px;text-align:center;font-size:12px;color:#92400e;margin:24px 0}
+  .features{background:#fff;padding:60px 24px}
+  .features-inner{max-width:900px;margin:0 auto}
+  .section-title{text-align:center;font-size:28px;font-weight:700;color:#0f172a;margin-bottom:8px}
+  .section-sub{text-align:center;font-size:16px;color:#64748b;margin-bottom:40px}
+  .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .feat-card{background:#f8fafc;border-radius:12px;padding:24px;border:1px solid #e2e8f0}
+  .feat-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .feat-card h3{font-size:16px;font-weight:600;color:#0f172a;margin-bottom:6px}
+  .feat-card p{font-size:14px;color:#64748b;line-height:1.6}
+  .pricing{background:#f0fdf4;padding:60px 24px}
+  .pricing-inner{max-width:700px;margin:0 auto}
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:500px){.price-grid{grid-template-columns:1fr}}
+  .price-card{background:#fff;border:1.5px solid #e2e8f0;border-radius:16px;padding:28px}
+  .price-card.pro{border:2px solid #059669}
+  .pro-badge{display:inline-block;font-size:11px;background:#059669;color:#fff;padding:3px 10px;border-radius:999px;margin-bottom:10px}
+  .plan-name{font-size:16px;font-weight:700;color:#0f172a;margin-bottom:4px}
+  .plan-price{font-size:36px;font-weight:800;color:#059669;margin:8px 0}
+  .plan-price span{font-size:14px;font-weight:400;color:#64748b}
+  .plan-feat{font-size:13px;color:#64748b;padding:5px 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f1f5f9}
+  .plan-feat:last-of-type{border:none}
+  .check{color:#059669;font-weight:700}
+  .plan-btn{width:100%;margin-top:20px;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
+  .btn-outline{background:#fff;border:1.5px solid #e2e8f0;color:#0f172a}
+  .btn-outline:hover{border-color:#059669;color:#059669}
+  .btn-green{background:#059669;border:none;color:#fff}
+  .btn-green:hover{background:#047857}
+  footer{background:#0f172a;color:#94a3b8;padding:32px 24px;text-align:center}
+  footer .logo{justify-content:center;color:#059669;margin-bottom:12px}
+  .foot-links{display:flex;justify-content:center;gap:20px;margin-bottom:16px;flex-wrap:wrap}
+  .foot-links a{font-size:13px;color:#64748b}
+  .foot-links a:hover{color:#059669}
+  .foot-copy{font-size:12px;color:#475569}
+  .api-notice{background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400e;margin-top:8px;display:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><span>✦</span> ToneFixer</div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#pricing" class="nav-cta">Get Pro</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Rewrite Any Text in the <span>Perfect Tone</span></h1>
+  <p>Make your emails, messages and documents sound professional, friendly, or formal — instantly with AI</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">50K+</div><div class="stat-label">Happy Users</div></div>
+    <div class="stat"><div class="stat-num">120+</div><div class="stat-label">Countries</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Tone Styles</div></div>
+  </div>
+</section>
+
+<div class="main">
+  <div class="tool-card">
+    <div class="tool-header">
+      <div>
+        <h2>✦ AI Tone Fixer</h2>
+        <p>Paste your text, choose a tone, and let AI do the magic</p>
+      </div>
+    </div>
+    <div class="tool-body">
+      <div class="tone-label">Choose Your Tone</div>
+      <div class="tone-row" id="toneRow">
+        <button class="tone-btn active" data-tone="Professional" data-desc="Polished and confident — perfect for emails, reports and client communication">Professional</button>
+        <button class="tone-btn" data-tone="Friendly" data-desc="Warm and approachable — great for colleagues, teammates and casual outreach">Friendly</button>
+        <button class="tone-btn" data-tone="Formal" data-desc="Serious and structured — ideal for official letters and legal documents">Formal</button>
+        <button class="tone-btn" data-tone="Casual" data-desc="Relaxed and conversational — perfect for chats and social media">Casual</button>
+        <button class="tone-btn" data-tone="Persuasive" data-desc="Compelling and influential — great for sales, pitches and proposals">Persuasive</button>
+        <button class="tone-btn" data-tone="Empathetic" data-desc="Caring and emotionally aware — ideal for sensitive or personal messages">Empathetic</button>
+      </div>
+      <div class="tone-desc" id="toneDesc">Polished and confident — perfect for emails, reports and client communication</div>
+      <div class="boxes">
+        <div class="box-wrap">
+          <div class="box-label">Your Text</div>
+          <textarea id="inputText" placeholder="Paste or type your text here... (any language works!)"></textarea>
+          <div class="examples">
+            <div class="ex-label">Try an example:</div>
+            <div class="chips">
+              <span class="chip" data-text="i want to ask my boss if i can have a day off next week">Ask boss for day off</span>
+              <span class="chip" data-text="I am writing to apply for the job. I think I am good at this work.">Job application</span>
+              <span class="chip" data-text="sorry i couldn't come yesterday something came up">Apologize for absence</span>
+              <span class="chip" data-text="our product is good and you should buy it">Product pitch</span>
+            </div>
+          </div>
+        </div>
+        <div class="box-wrap">
+          <div class="box-label">AI Result</div>
+          <div class="output-box" id="outputBox">
+            <span class="output-placeholder" id="placeholder">Your rewritten text will appear here...</span>
+            <span id="resultText" style="display:none"></span>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="fix-btn" id="fixBtn" onclick="fixTone()">
+          <span id="btnIcon">✦</span>
+          <span id="btnText">Fix My Tone</span>
+        </button>
+        <button class="copy-btn" id="copyBtn" style="display:none" onclick="copyResult()">
+          📋 Copy Result
+        </button>
+      </div>
+      <div class="api-notice" id="apiNotice">
+        ⚠️ API key not configured. Please add your Claude API key to use this tool.
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-banner">
+    📢 Advertisement — Google AdSense will display ads here
+  </div>
+</div>
+
+<section class="features" id="features">
+  <div class="features-inner">
+    <h2 class="section-title">Why ToneFixer?</h2>
+    <p class="section-sub">The fastest way to communicate with confidence in any situation</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon" style="background:#ecfdf5">⚡</div>
+        <h3>Instant Results</h3>
+        <p>Get your rewritten text in just 3 seconds. No waiting, no signup required.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:#eff6ff">🌍</div>
+        <h3>Any Language</h3>
+        <p>Works with English, Spanish, French, Bengali, Arabic and 50+ more languages.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:#fdf4ff">🎯</div>
+        <h3>6 Unique Tones</h3>
+        <p>Professional, Friendly, Formal, Casual, Persuasive and Empathetic — pick what fits.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:#fff7ed">🔒</div>
+        <h3>Private & Secure</h3>
+        <p>Your text is never stored or shared. Complete privacy guaranteed.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:#f0fdf4">✉️</div>
+        <h3>Email Ready</h3>
+        <p>Perfect for professional emails, cover letters and business proposals.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:#fef2f2">🤖</div>
+        <h3>Powered by AI</h3>
+        <p>Uses the latest Claude AI to understand context and rewrite naturally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="pricing-inner">
+    <h2 class="section-title">Simple Pricing</h2>
+    <p class="section-sub">Start free, upgrade when you need more</p>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">$0 <span>/month</span></div>
+        <div class="plan-feat"><span class="check">✓</span> 10 rewrites per day</div>
+        <div class="plan-feat"><span class="check">✓</span> 3 tone styles</div>
+        <div class="plan-feat"><span class="check">✓</span> English & major languages</div>
+        <div class="plan-feat"><span class="check">✓</span> Copy to clipboard</div>
+        <button class="plan-btn btn-outline">Get Started Free</button>
+      </div>
+      <div class="price-card pro">
+        <div class="pro-badge">Most Popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$5 <span>/month</span></div>
+        <div class="plan-feat"><span class="check">✓</span> Unlimited rewrites</div>
+        <div class="plan-feat"><span class="check">✓</span> All 6 tone styles</div>
+        <div class="plan-feat"><span class="check">✓</span> 50+ languages</div>
+        <div class="plan-feat"><span class="check">✓</span> No ads</div>
+        <div class="plan-feat"><span class="check">✓</span> Priority support</div>
+        <button class="plan-btn btn-green">Get Pro Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">✦ ToneFixer</div>
+  <div class="foot-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Contact</a>
+    <a href="#">Blog</a>
+  </div>
+  <div class="foot-copy">© 2025 ToneFixer. All rights reserved.</div>
+</footer>
+
+<script>
+  let selectedTone = 'Professional';
+
+  document.querySelectorAll('.tone-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tone-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedTone = btn.dataset.tone;
+      document.getElementById('toneDesc').textContent = btn.dataset.desc;
+    });
+  });
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.getElementById('inputText').value = chip.dataset.text;
+    });
+  });
+
+  async function fixTone() {
+    const text = document.getElementById('inputText').value.trim();
+    if (!text) { alert('Please enter some text first!'); return; }
+
+    const btn = document.getElementById('fixBtn');
+    const btnText = document.getElementById('btnText');
+    const btnIcon = document.getElementById('btnIcon');
+    btn.disabled = true;
+    btnIcon.outerHTML = '<span class="spinner" id="btnIcon"></span>';
+    btnText.textContent = 'AI is working...';
+
+    document.getElementById('placeholder').style.display = 'none';
+    document.getElementById('resultText').style.display = 'none';
+    document.getElementById('copyBtn').style.display = 'none';
+    document.getElementById('apiNotice').style.display = 'none';
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          messages: [{
+            role: 'user',
+            content: `You are a professional tone rewriter. Rewrite the following text in a ${selectedTone} tone. Keep the same meaning but completely change the tone. Detect the language and respond in the same language. Output ONLY the rewritten text, nothing else.\n\nText:\n${text}`
+          }]
+        })
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error.message);
+      const output = data.content?.map(c => c.text || '').join('') || 'Something went wrong. Please try again.';
+      document.getElementById('resultText').textContent = output;
+      document.getElementById('resultText').style.display = 'block';
+      document.getElementById('copyBtn').style.display = 'flex';
+    } catch (e) {
+      document.getElementById('apiNotice').style.display = 'block';
+      document.getElementById('placeholder').style.display = 'block';
+    }
+
+    btn.disabled = false;
+    document.getElementById('btnIcon').outerHTML = '<span id="btnIcon">✦</span>';
+    btnText.textContent = 'Fix Again';
+  }
+
+  function copyResult() {
+    const text = document.getElementById('resultText').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => { btn.innerHTML = '📋 Copy Result'; }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
