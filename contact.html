@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - ToneFixer</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8fafc;color:#1e293b;line-height:1.7}
+  nav{background:#fff;border-bottom:1px solid #e2e8f0;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .logo{font-size:20px;font-weight:700;color:#059669;text-decoration:none}
+  .nav-links a{font-size:14px;color:#64748b;text-decoration:none;margin-left:24px}
+  .nav-cta{background:#059669;color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:500}
+  .hero{background:linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%);padding:60px 24px;text-align:center}
+  .hero h1{font-size:36px;font-weight:800;color:#064e3b;margin-bottom:16px}
+  .hero p{font-size:18px;color:#065f46;max-width:500px;margin:0 auto}
+  .container{max-width:800px;margin:0 auto;padding:40px 24px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:40px}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+  .info-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:28px}
+  .info-card h2{font-size:20px;font-weight:700;color:#0f172a;margin-bottom:20px}
+  .info-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+  .info-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  .info-label{font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.05em}
+  .info-value{font-size:14px;color:#0f172a;font-weight:500}
+  .form-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:28px}
+  .form-card h2{font-size:20px;font-weight:700;color:#0f172a;margin-bottom:20px}
+  .form-group{margin-bottom:16px}
+  label{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px}
+  input,textarea,select{width:100%;border:1.5px solid #e2e8f0;border-radius:8px;padding:10px 14px;font-size:14px;color:#1e293b;font-family:inherit;outline:none;transition:border .2s;background:#f8fafc}
+  input:focus,textarea:focus,select:focus{border-color:#059669;background:#fff}
+  textarea{min-height:120px;resize:vertical}
+  .submit-btn{width:100%;padding:12px;background:#059669;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:8px}
+  .submit-btn:hover{background:#047857}
+  .faq{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:28px;margin-bottom:40px}
+  .faq h2{font-size:20px;font-weight:700;color:#0f172a;margin-bottom:20px}
+  .faq-item{border-bottom:1px solid #f1f5f9;padding:16px 0}
+  .faq-item:last-child{border:none}
+  .faq-q{font-size:15px;font-weight:600;color:#0f172a;margin-bottom:6px}
+  .faq-a{font-size:14px;color:#64748b}
+  .success-msg{background:#ecfdf5;border:1px solid #6ee7b7;border-radius:10px;padding:16px;text-align:center;font-size:14px;color:#065f46;margin-top:12px;display:none}
+  footer{background:#0f172a;color:#94a3b8;padding:24px;text-align:center;margin-top:60px}
+  footer a{color:#059669;text-decoration:none}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">✦ ToneFixer</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/" class="nav-cta">Try Free</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Contact Us</h1>
+  <p>Have a question or feedback? We'd love to hear from you. We usually respond within 24 hours.</p>
+</div>
+
+<div class="container">
+  <div class="grid">
+    <div class="info-card">
+      <h2>Get In Touch</h2>
+      <div class="info-item">
+        <div class="info-icon" style="background:#ecfdf5">📧</div>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-value">support@tonefixer.online</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon" style="background:#eff6ff">🌍</div>
+        <div>
+          <div class="info-label">Website</div>
+          <div class="info-value">tonefixer.online</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon" style="background:#fdf4ff">⏰</div>
+        <div>
+          <div class="info-label">Response Time</div>
+          <div class="info-value">Within 24 hours</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon" style="background:#fff7ed">🌐</div>
+        <div>
+          <div class="info-label">Support Languages</div>
+          <div class="info-value">English, Bengali & more</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h2>Send a Message</h2>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="name" placeholder="John Doe">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="john@example.com">
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select id="subject">
+          <option>General Question</option>
+          <option>Bug Report</option>
+          <option>Feature Request</option>
+          <option>Billing Issue</option>
+          <option>Partnership</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="message" placeholder="Tell us how we can help you..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="submitForm()">Send Message →</button>
+      <div class="success-msg" id="successMsg">✅ Thank you! We'll get back to you within 24 hours.</div>
+    </div>
+  </div>
+
+  <div class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">Is ToneFixer free to use?</div>
+      <div class="faq-a">Yes! ToneFixer offers free rewrites every day. For unlimited access, check out our Pro plan at just $5/month.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Does ToneFixer store my text?</div>
+      <div class="faq-a">No. Your text is processed in real-time and never stored on our servers. Your privacy is our priority.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What languages does ToneFixer support?</div>
+      <div class="faq-a">ToneFixer works with 50+ languages including English, Bengali, Spanish, French, Arabic, Hindi and many more.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How does the AI work?</div>
+      <div class="faq-a">ToneFixer uses Claude AI by Anthropic — one of the most advanced language models available — to understand and rewrite your text in the chosen tone.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I use ToneFixer for commercial purposes?</div>
+      <div class="faq-a">Absolutely! Many of our users use ToneFixer for business emails, marketing copy, and professional communication.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 ToneFixer. All rights reserved. | <a href="/privacy.html">Privacy Policy</a> | <a href="/about.html">About</a> | <a href="/contact.html">Contact</a></p>
+</footer>
+
+<script>
+  function submitForm() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    if (!name || !email || !message) {
+      alert('Please fill in all fields.');
+      return;
+    }
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('message').value = '';
+  }
+</script>
+</body>
+</html>
