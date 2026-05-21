@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ToneFixer - AI Tone Rewriter | Rewrite Any Text Professionally</title>
- <link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
 <meta name="description" content="Fix the tone of any text instantly using AI. Make your emails, messages and documents sound professional, friendly, formal or casual in seconds.">
- <meta name="google-site-verification" content="SjST305EBWxzIzJzDsS7oeSB5xCqsZDQIm0QUHGEZhw" />
+<meta name="google-site-verification" content="SjST305EBWxzIzJzDsS7oeSB5xCqsZDQIm0QUHGEZhw" />
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8fafc;color:#1e293b;line-height:1.6}
@@ -36,7 +36,7 @@
   .tone-btn.active{background:#059669;border-color:#059669;color:#fff}
   .tone-desc{font-size:12px;color:#64748b;margin-bottom:16px;min-height:18px}
   .boxes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  @media(max-width:600px){.boxes{grid-template-columns:1fr}.nav-links{display:none}}
+  @media(max-width:600px){.boxes{grid-template-columns:1fr}.nav-links{display:none}.before-after-grid{grid-template-columns:1fr!important}}
   .box-wrap{display:flex;flex-direction:column}
   .box-label{font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
   textarea{width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:14px;font-size:14px;color:#1e293b;font-family:inherit;resize:vertical;min-height:160px;outline:none;transition:border .2s;background:#f8fafc}
@@ -54,15 +54,51 @@
   .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
   @keyframes spin{to{transform:rotate(360deg)}}
   .ad-banner{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:12px 16px;text-align:center;font-size:12px;color:#92400e;margin:24px 0}
-  .features{background:#fff;padding:60px 24px}
-  .features-inner{max-width:900px;margin:0 auto}
   .section-title{text-align:center;font-size:28px;font-weight:700;color:#0f172a;margin-bottom:8px}
   .section-sub{text-align:center;font-size:16px;color:#64748b;margin-bottom:40px}
+
+  /* BEFORE AFTER SECTION */
+  .before-after{background:#fff;padding:60px 24px}
+  .before-after-inner{max-width:900px;margin:0 auto}
+  .before-after-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:16px}
+  .ba-card{border-radius:14px;overflow:hidden;border:1px solid #e2e8f0}
+  .ba-header{padding:12px 16px;font-size:13px;font-weight:700;text-align:center}
+  .ba-before .ba-header{background:#fef2f2;color:#dc2626}
+  .ba-after .ba-header{background:#ecfdf5;color:#059669}
+  .ba-tone .ba-header{background:#eff6ff;color:#3b82f6}
+  .ba-body{padding:16px;font-size:14px;color:#475569;line-height:1.7;min-height:100px}
+  .ba-before .ba-body{background:#fff5f5}
+  .ba-after .ba-body{background:#f0fdf4}
+  .ba-tone .ba-body{background:#f8faff;text-align:center}
+  .ba-tone-label{font-size:24px;margin-bottom:8px}
+  .ba-tone-name{font-size:15px;font-weight:700;color:#1e293b}
+  .ba-tone-desc{font-size:12px;color:#64748b;margin-top:4px}
+  .ba-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+  .ba-tab{padding:8px 20px;border-radius:999px;border:1.5px solid #e2e8f0;background:#fff;color:#64748b;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+  .ba-tab.active{background:#059669;border-color:#059669;color:#fff}
+
+  /* FEATURES */
+  .features{background:#f8fafc;padding:60px 24px}
+  .features-inner{max-width:900px;margin:0 auto}
   .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-  .feat-card{background:#f8fafc;border-radius:12px;padding:24px;border:1px solid #e2e8f0}
+  .feat-card{background:#fff;border-radius:12px;padding:24px;border:1px solid #e2e8f0}
   .feat-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
   .feat-card h3{font-size:16px;font-weight:600;color:#0f172a;margin-bottom:6px}
   .feat-card p{font-size:14px;color:#64748b;line-height:1.6}
+
+  /* FAQ */
+  .faq-section{background:#fff;padding:60px 24px}
+  .faq-inner{max-width:720px;margin:0 auto}
+  .faq-item{border:1px solid #e2e8f0;border-radius:12px;margin-bottom:12px;overflow:hidden}
+  .faq-question{padding:18px 20px;font-size:15px;font-weight:600;color:#0f172a;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff;transition:background .2s}
+  .faq-question:hover{background:#f8fafc}
+  .faq-question.open{background:#ecfdf5;color:#059669}
+  .faq-icon{font-size:18px;font-weight:300;transition:transform .2s;flex-shrink:0}
+  .faq-question.open .faq-icon{transform:rotate(45deg)}
+  .faq-answer{padding:0 20px;max-height:0;overflow:hidden;transition:all .3s;font-size:14px;color:#475569;line-height:1.7}
+  .faq-answer.open{padding:16px 20px;max-height:300px}
+
+  /* PRICING */
   .pricing{background:#f0fdf4;padding:60px 24px}
   .pricing-inner{max-width:700px;margin:0 auto}
   .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -85,8 +121,7 @@
   .foot-copy{font-size:12px;color:#475569}
   .error-msg{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:13px;color:#dc2626;margin-top:8px;display:none}
 </style>
- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7993461749439016"
-     crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7993461749439016" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -95,6 +130,7 @@
   <div class="nav-links">
     <a href="/blog.html">Blog</a>
     <a href="#features">Features</a>
+    <a href="#faq">FAQ</a>
     <a href="#pricing">Pricing</a>
     <a href="#pricing" class="nav-cta">Get Pro</a>
   </div>
@@ -164,6 +200,41 @@
   <div class="ad-banner">📢 Advertisement — Google AdSense will display ads here</div>
 </div>
 
+<!-- BEFORE / AFTER SECTION -->
+<section class="before-after">
+  <div class="before-after-inner">
+    <h2 class="section-title">See ToneFixer in Action</h2>
+    <p class="section-sub">Real examples — see exactly how AI transforms your writing</p>
+    <div class="ba-tabs">
+      <button class="ba-tab active" onclick="showExample(0)">Professional Email</button>
+      <button class="ba-tab" onclick="showExample(1)">Apology Message</button>
+      <button class="ba-tab" onclick="showExample(2)">Job Application</button>
+      <button class="ba-tab" onclick="showExample(3)">Product Pitch</button>
+    </div>
+    <div id="baExamples">
+      <div class="before-after-grid">
+        <div class="ba-card ba-before">
+          <div class="ba-header">❌ Before (Original)</div>
+          <div class="ba-body" id="baBeforeText">send me the report asap i need it today its urgent</div>
+        </div>
+        <div class="ba-card ba-tone">
+          <div class="ba-header">🎯 Tone Applied</div>
+          <div class="ba-body">
+            <div class="ba-tone-label" id="baToneIcon">💼</div>
+            <div class="ba-tone-name" id="baToneName">Professional</div>
+            <div class="ba-tone-desc" id="baToneDesc">Polished, confident and respectful</div>
+          </div>
+        </div>
+        <div class="ba-card ba-after">
+          <div class="ba-header">✅ After (ToneFixer)</div>
+          <div class="ba-body" id="baAfterText">Could you please send me the report at your earliest convenience? I need it by end of day today, as it is time-sensitive. Thank you for your prompt attention to this.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
 <section class="features" id="features">
   <div class="features-inner">
     <h2 class="section-title">Why ToneFixer?</h2>
@@ -179,6 +250,72 @@
   </div>
 </section>
 
+<!-- FAQ SECTION -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-sub">Everything you need to know about ToneFixer</p>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Is ToneFixer free to use? <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Yes! ToneFixer is completely free to use with no signup required. You can rewrite texts instantly without creating an account. For unlimited rewrites and all 6 tone styles, upgrade to Pro for just $5/month.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        What languages does ToneFixer support? <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">ToneFixer works with 50+ languages including English, Bengali, Spanish, French, Arabic, Hindi, Portuguese, German, Japanese, and many more. Simply paste your text in any language and the AI will rewrite it in the same language with the chosen tone.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Is my text kept private and secure? <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Absolutely. Your text is processed in real-time and never stored on our servers. We do not save, share, or use your content for any purpose other than generating the rewritten result. Your privacy is our top priority.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        What are the 6 tone styles? <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">ToneFixer offers 6 professional tone styles: Professional (polished and confident, perfect for business emails), Friendly (warm and approachable for colleagues), Formal (serious and structured for official documents), Casual (relaxed and conversational for chats), Persuasive (compelling for sales and pitches), and Empathetic (caring and understanding for sensitive messages).</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        How does ToneFixer work? <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">ToneFixer uses Claude AI — one of the most advanced language models in the world — to understand the meaning and context of your text, then rewrites it in the tone you select. The AI preserves your original meaning while transforming the style, vocabulary, and structure to match the chosen tone perfectly.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        What types of text can I rewrite? <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">You can rewrite virtually any type of written communication — emails, messages, cover letters, proposals, apologies, social media posts, product descriptions, reports, and more. ToneFixer works for both personal and professional communication in any language.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        What is the difference between Free and Pro? <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">The Free plan gives you access to the core ToneFixer tool with no signup required. The Pro plan ($5/month) unlocks unlimited rewrites, all 6 tone styles, support for 50+ languages, an ad-free experience, and priority support. Pro is ideal for professionals who communicate frequently and need perfect tone every time.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Can I use ToneFixer for commercial purposes? <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Yes! ToneFixer can be used for professional and commercial communication including business emails, client proposals, marketing copy, and customer service messages. Many of our users are freelancers, entrepreneurs, and business professionals who use ToneFixer daily for their work communication.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="pricing-inner">
     <h2 class="section-title">Simple Pricing</h2>
@@ -190,6 +327,7 @@
         <div class="plan-feat"><span class="check">✓</span> 10 rewrites per day</div>
         <div class="plan-feat"><span class="check">✓</span> 3 tone styles</div>
         <div class="plan-feat"><span class="check">✓</span> English & major languages</div>
+        <div class="plan-feat"><span class="check">✓</span> No signup required</div>
         <button class="plan-btn btn-outline">Get Started Free</button>
       </div>
       <div class="price-card pro">
@@ -213,6 +351,7 @@
     <a href="/privacy.html">Privacy Policy</a>
     <a href="/privacy.html">Terms of Service</a>
     <a href="/contact.html">Contact</a>
+    <a href="/blog.html">Blog</a>
   </div>
   <div class="foot-copy">© 2026 ToneFixer. All rights reserved.</div>
 </footer>
@@ -238,7 +377,6 @@
   async function fixTone() {
     const text = document.getElementById('inputText').value.trim();
     if (!text) { alert('Please enter some text first!'); return; }
-
     const btn = document.getElementById('fixBtn');
     const btnText = document.getElementById('btnText');
     btn.disabled = true;
@@ -247,7 +385,6 @@
     document.getElementById('resultText').style.display = 'none';
     document.getElementById('copyBtn').style.display = 'none';
     document.getElementById('errorMsg').style.display = 'none';
-
     try {
       const res = await fetch('/api/fix', {
         method: 'POST',
@@ -263,7 +400,6 @@
       document.getElementById('errorMsg').style.display = 'block';
       document.getElementById('placeholder').style.display = 'block';
     }
-
     btn.disabled = false;
     btnText.textContent = 'Fix Again';
   }
@@ -275,6 +411,54 @@
       btn.textContent = '✓ Copied!';
       setTimeout(() => { btn.innerHTML = '📋 Copy Result'; }, 2000);
     });
+  }
+
+  // BEFORE AFTER EXAMPLES
+  const examples = [
+    {
+      before: "send me the report asap i need it today its urgent",
+      after: "Could you please send me the report at your earliest convenience? I need it by end of day today, as it is time-sensitive. Thank you for your prompt attention to this.",
+      icon: "💼", tone: "Professional", desc: "Polished, confident and respectful"
+    },
+    {
+      before: "sorry i messed up the project and now everything is wrong because of me",
+      after: "I sincerely apologize for the errors in the project. I take full responsibility for what happened and I am committed to correcting the issues immediately. Thank you for your patience and understanding.",
+      icon: "🤝", tone: "Empathetic", desc: "Caring, sincere and emotionally aware"
+    },
+    {
+      before: "I want the job. I am good at coding and I learn fast. please hire me",
+      after: "I am excited to apply for this position. With a strong foundation in coding and a proven ability to learn and adapt quickly, I am confident I would be a valuable addition to your team. I would welcome the opportunity to discuss how my skills align with your needs.",
+      icon: "📋", tone: "Formal", desc: "Structured and professional"
+    },
+    {
+      before: "our product is good and you should buy it because it will help you",
+      after: "Our product is specifically designed to solve the challenges you face every day. Thousands of customers have already experienced measurable improvements in their productivity and results. I'd love to show you exactly how it can work for you — would you be open to a quick demo?",
+      icon: "💪", tone: "Persuasive", desc: "Compelling and benefit-focused"
+    }
+  ];
+
+  function showExample(index) {
+    document.querySelectorAll('.ba-tab').forEach((t,i) => t.classList.toggle('active', i===index));
+    const ex = examples[index];
+    document.getElementById('baBeforeText').textContent = ex.before;
+    document.getElementById('baAfterText').textContent = ex.after;
+    document.getElementById('baToneIcon').textContent = ex.icon;
+    document.getElementById('baToneName').textContent = ex.tone;
+    document.getElementById('baToneDesc').textContent = ex.desc;
+  }
+
+  // FAQ TOGGLE
+  function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.classList.remove('open');
+      q.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      el.classList.add('open');
+      answer.classList.add('open');
+    }
   }
 </script>
 </body>
