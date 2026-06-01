@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing - ToneFixer | Simple & Affordable Plans</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="description" content="ToneFixer pricing — start free with a 3-day trial, then upgrade to Pro for unlimited AI tone rewrites at just $5/month.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7993461749439016" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1c1c28;--border:#2a2a3d;--accent:#7c5cfc;--accent2:#00d4aa;--accent3:#ff6b6b;--text:#f0f0f8;--muted:#7a7a9d;--pro:#f5a623}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+.btn{padding:.5rem 1.2rem;border-radius:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-ghost:hover{color:var(--text);border-color:var(--accent)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#6a4de8;transform:translateY(-1px)}
+.btn-pro{background:linear-gradient(135deg,#f5a623,#e8860a);color:#000;font-weight:700}
+.btn-pro:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(245,166,35,.35)}
+.btn-google{background:#fff;color:#333;border:1px solid #ddd;gap:.5rem;padding:.65rem 1.4rem;width:100%;justify-content:center;font-size:1rem}
+.btn-google:hover{background:#f5f5f5}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);text-decoration:none;flex-shrink:0}
+.nav-links{display:none;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,15,0.98);backdrop-filter:blur(20px);z-index:99;padding:5rem 2rem 2rem}
+.nav-links.open{display:flex}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:1.15rem;padding:.85rem 0;border-bottom:1px solid var(--border);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-mobile-btns{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem}
+.nav-mobile-btns .btn{padding:.8rem}
+.nav-right{display:none}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;z-index:101;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(min-width:768px){
+  .nav-links{display:flex!important;flex-direction:row;position:static;background:none;backdrop-filter:none;padding:0;gap:1.5rem;align-items:center}
+  .nav-links a{font-size:.9rem;padding:0;border-bottom:none}
+  .nav-mobile-btns{display:none}
+  .nav-right{display:flex;gap:.75rem;align-items:center}
+  .hamburger{display:none}
+}
+
+/* USER */
+.user-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;cursor:pointer;position:relative;user-select:none}
+.user-dropdown{position:absolute;top:42px;right:0;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.5rem;min-width:180px;display:none;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.user-avatar:hover .user-dropdown{display:block}
+.user-dropdown a,.user-dropdown button{display:block;width:100%;text-align:left;padding:.5rem .75rem;color:var(--text);text-decoration:none;border:none;background:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.88rem;border-radius:6px}
+.user-dropdown a:hover,.user-dropdown button:hover{background:var(--border)}
+
+/* PAGE HERO */
+.page-hero{padding:4rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;width:600px;height:400px;background:radial-gradient(circle,rgba(124,92,252,.12) 0%,transparent 70%);top:-50px;left:50%;transform:translateX(-50%);pointer-events:none}
+.page-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(124,92,252,.1);border:1px solid rgba(124,92,252,.3);border-radius:100px;padding:.3rem .9rem;font-size:.8rem;color:var(--accent);margin-bottom:1rem}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;margin-bottom:.8rem;line-height:1.15}
+.page-hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-hero p{color:var(--muted);font-size:1rem;max-width:500px;margin:0 auto;line-height:1.7}
+
+/* PRICING */
+.pricing-section{max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.pricing-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+@media(min-width:640px){.pricing-grid{grid-template-columns:1fr 1fr}}
+.pricing-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:2rem;position:relative;transition:border-color .2s}
+.pricing-card.featured{border-color:rgba(124,92,252,.5);background:linear-gradient(145deg,rgba(124,92,252,.07),var(--surface));box-shadow:0 0 40px rgba(124,92,252,.1)}
+.popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:.72rem;font-weight:700;padding:.3rem .9rem;border-radius:100px;letter-spacing:.06em;white-space:nowrap}
+.plan-icon{font-size:2rem;margin-bottom:1rem}
+.plan-name{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:.3rem}
+.plan-desc{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem;line-height:1.5}
+.plan-price{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;margin-bottom:.3rem;line-height:1}
+.plan-price span{font-size:1rem;color:var(--muted);font-weight:400}
+.plan-billing{color:var(--muted);font-size:.82rem;margin-bottom:1.5rem}
+.plan-features{list-style:none;margin-bottom:1.75rem;display:flex;flex-direction:column;gap:.6rem}
+.plan-features li{display:flex;align-items:flex-start;gap:.6rem;font-size:.9rem;color:var(--muted)}
+.plan-features li .check{color:var(--accent2);font-weight:700;flex-shrink:0;margin-top:1px}
+.plan-features li.muted-feature{opacity:.5}
+.plan-btn{width:100%;padding:.85rem;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;border-radius:12px;border:none;cursor:pointer;transition:all .2s}
+
+/* COMPARE TABLE */
+.compare-section{max-width:760px;margin:0 auto;padding:0 1.5rem 5rem}
+.compare-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:.5rem}
+.compare-sub{color:var(--muted);font-size:.9rem;margin-bottom:2rem}
+.compare-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.compare-table th{font-family:'Syne',sans-serif;font-weight:700;padding:.85rem 1rem;text-align:left;border-bottom:2px solid var(--border);color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.compare-table th:not(:first-child){text-align:center}
+.compare-table td{padding:.85rem 1rem;border-bottom:1px solid var(--border);color:var(--text)}
+.compare-table td:not(:first-child){text-align:center}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table .yes{color:var(--accent2);font-size:1.1rem}
+.compare-table .no{color:var(--muted);opacity:.4;font-size:1.1rem}
+.compare-table .col-pro{background:rgba(124,92,252,.04)}
+.compare-table .highlight-row td{background:rgba(124,92,252,.04)}
+
+/* FAQ MINI */
+.faq-mini{max-width:760px;margin:0 auto;padding:0 1.5rem 5rem}
+.faq-mini-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:1.5rem}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--text);padding:1rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:500;gap:1rem}
+.faq-q .icon{color:var(--muted);font-size:1.2rem;transition:transform .25s;flex-shrink:0}
+.faq-q.open .icon{transform:rotate(45deg);color:var(--accent)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a p{color:var(--muted);font-size:.9rem;line-height:1.75;padding-bottom:1rem}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:500;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2rem;max-width:420px;width:100%;transform:scale(.95);transition:transform .2s;position:relative}
+.modal-overlay.open .modal{transform:scale(1)}
+.modal h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:.4rem}
+.modal p{color:var(--muted);font-size:.88rem;margin-bottom:1.25rem;line-height:1.6}
+.modal-highlight{background:rgba(124,92,252,.1);border:1px solid rgba(124,92,252,.25);border-radius:10px;padding:.85rem 1rem;margin-bottom:1.25rem;font-size:.88rem;color:var(--text);line-height:1.6}
+.modal-highlight strong{color:var(--accent)}
+.modal-divider{display:flex;align-items:center;gap:1rem;margin:1rem 0;color:var(--muted);font-size:.8rem}
+.modal-divider::before,.modal-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.modal-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.7rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.92rem;margin-bottom:.7rem}
+.modal-input:focus{outline:none;border-color:var(--accent)}
+.modal-submit{width:100%;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:.75rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:background .2s}
+.modal-submit:hover{background:#6a4de8}
+.modal-footer{text-align:center;margin-top:.9rem;font-size:.83rem;color:var(--muted)}
+.modal-footer a{color:var(--accent);cursor:pointer}
+.modal-close{position:absolute;top:.8rem;right:1.1rem;background:none;border:none;color:var(--muted);font-size:1.8rem;cursor:pointer;line-height:1}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.7rem 1.1rem;font-size:.88rem;z-index:999;transform:translateY(100px);opacity:0;transition:all .3s;max-width:280px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:var(--accent2)}
+.toast.error{border-color:var(--accent3)}
+footer{border-top:1px solid var(--border);padding:1.75rem;text-align:center;color:var(--muted);font-size:.85rem}
+footer a{color:var(--muted);text-decoration:none;margin:0 .6rem}
+footer a:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">ToneFixer ✦</a>
+  <div class="nav-links" id="navLinks">
+    <a href="/features.html">Features</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/pricing.html" class="active">Pricing</a>
+    <div class="nav-mobile-btns" id="navMobileBtns">
+      <button class="btn btn-ghost" onclick="openModal('login');toggleNav()">Log in</button>
+      <button class="btn btn-primary" onclick="openModal('signup');toggleNav()">Sign up free</button>
+    </div>
+  </div>
+  <div class="nav-right" id="navRight">
+    <button class="btn btn-ghost" onclick="openModal('login')">Log in</button>
+    <button class="btn btn-primary" onclick="openModal('signup')">Sign up free</button>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="page-hero">
+  <div class="page-badge">✦ Simple, Transparent Pricing</div>
+  <h1>Start Free,<br><span>Upgrade Anytime</span></h1>
+  <p>No hidden fees. No credit card required to start. Cancel anytime.</p>
+</div>
+
+<div class="pricing-section">
+  <div class="pricing-grid">
+
+    <!-- FREE -->
+    <div class="pricing-card">
+      <div class="plan-icon">🆓</div>
+      <div class="plan-name">Free Trial</div>
+      <div class="plan-desc">Perfect for trying out ToneFixer</div>
+      <div class="plan-price">$0 <span>/ forever</span></div>
+      <div class="plan-billing">No credit card required</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> 1 try as guest (no account)</li>
+        <li><span class="check">✓</span> 10 rewrites/day for 3 days</li>
+        <li><span class="check">✓</span> All 8 tone styles</li>
+        <li><span class="check">✓</span> Any language</li>
+        <li><span class="check">✓</span> One-click copy</li>
+        <li class="muted-feature"><span class="check">✗</span> Unlimited rewrites</li>
+        <li class="muted-feature"><span class="check">✗</span> Priority processing</li>
+      </ul>
+      <button class="plan-btn btn-ghost" onclick="handleFreePlan()">Get Started Free</button>
+    </div>
+
+    <!-- PRO -->
+    <div class="pricing-card featured">
+      <div class="popular-badge">⭐ MOST POPULAR</div>
+      <div class="plan-icon">🚀</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-desc">For professionals who write daily</div>
+      <div class="plan-price">$5 <span>/ month</span></div>
+      <div class="plan-billing">Billed monthly · Cancel anytime</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> <strong>Unlimited</strong> rewrites</li>
+        <li><span class="check">✓</span> All 8 tone styles</li>
+        <li><span class="check">✓</span> Any language</li>
+        <li><span class="check">✓</span> Priority processing</li>
+        <li><span class="check">✓</span> One-click copy</li>
+        <li><span class="check">✓</span> Early access to new features</li>
+        <li><span class="check">✓</span> Priority support</li>
+      </ul>
+      <button class="plan-btn btn-pro" onclick="handleProPlan()">Upgrade to Pro →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMPARE -->
+<div class="compare-section">
+  <div class="compare-title">Full Comparison</div>
+  <div class="compare-sub">Everything included in each plan</div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Free Trial</th>
+        <th class="col-pro" style="color:var(--accent)">Pro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Guest try (no account)</td><td><span class="yes">✓</span> 1 time</td><td class="col-pro"><span class="yes">✓</span></td></tr>
+      <tr class="highlight-row"><td>Daily rewrites</td><td>10/day (3 days)</td><td class="col-pro"><strong style="color:var(--accent2)">Unlimited</strong></td></tr>
+      <tr><td>Tone styles</td><td>All 8</td><td class="col-pro">All 8</td></tr>
+      <tr><td>Language support</td><td>Any language</td><td class="col-pro">Any language</td></tr>
+      <tr><td>Processing speed</td><td>Standard</td><td class="col-pro"><strong style="color:var(--accent)">Priority</strong></td></tr>
+      <tr><td>One-click copy</td><td><span class="yes">✓</span></td><td class="col-pro"><span class="yes">✓</span></td></tr>
+      <tr><td>New features early access</td><td><span class="no">✗</span></td><td class="col-pro"><span class="yes">✓</span></td></tr>
+      <tr><td>Priority support</td><td><span class="no">✗</span></td><td class="col-pro"><span class="yes">✓</span></td></tr>
+      <tr><td>Price</td><td>Free</td><td class="col-pro"><strong style="color:var(--pro)">$5/month</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FAQ -->
+<div class="faq-mini">
+  <div class="faq-mini-title">Pricing Questions</div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do I need a credit card to start? <span class="icon">+</span></button><div class="faq-a"><p>No! You can try ToneFixer completely free — 1 time as a guest or 10 rewrites/day for 3 days with a free account. No credit card needed until you choose to upgrade to Pro.</p></div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I cancel my Pro subscription anytime? <span class="icon">+</span></button><div class="faq-a"><p>Yes, cancel anytime with no fees or penalties. Your Pro access continues until the end of your current billing period. You will never be charged without your explicit consent.</p></div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What happens after my free trial ends? <span class="icon">+</span></button><div class="faq-a"><p>After your 3-day free trial, you can upgrade to Pro for $5/month to continue with unlimited rewrites. You will never be automatically charged — upgrading is always your choice.</p></div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is $5/month really all I pay? <span class="icon">+</span></button><div class="faq-a"><p>Yes! $5/month is the full price with no hidden fees. You get unlimited rewrites, all 8 tones, any language, and priority processing for just $5/month.</p></div></div>
+</div>
+
+<footer>
+  <p style="margin-bottom:.6rem">© 2026 ToneFixer. All rights reserved.</p>
+  <div><a href="/privacy.html">Privacy Policy</a><a href="/privacy.html">Terms</a><a href="/contact.html">Contact</a><a href="/blog.html">Blog</a></div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="authModal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPABASE_URL='https://akijndyfjuumfeorqpko.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFraWpuZHlmanV1bWZlb3JxcGtvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzMDExNTUsImV4cCI6MjA5NTg3NzE1NX0.Sc4Qv-7m_Cmb3A2r2PMnzmnsKclu0XC6qxf0mVK7ZbA';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+let currentUser=null;
+
+function toggleNav(){
+  const n=document.getElementById('navLinks'),h=document.getElementById('hamburger');
+  n.classList.toggle('open');h.classList.toggle('open');
+  document.body.style.overflow=n.classList.contains('open')?'hidden':'';
+}
+
+async function initAuth(){
+  const{data:{session}}=await sb.auth.getSession();
+  if(session)setUser(session.user);
+  sb.auth.onAuthStateChange((_,session)=>{
+    if(session){setUser(session.user);closeModal();showToast('Welcome! 🎉','success');}
+    else{currentUser=null;renderNavGuest();}
+  });
+}
+
+function setUser(u){currentUser=u;renderNavUser(u);}
+
+function renderNavGuest(){
+  document.getElementById('navRight').innerHTML=
+    '<button class="btn btn-ghost" onclick="openModal(\'login\')">Log in</button>'+
+    '<button class="btn btn-primary" onclick="openModal(\'signup\')">Sign up free</button>';
+  document.getElementById('navMobileBtns').innerHTML=
+    '<button class="btn btn-ghost" onclick="openModal(\'login\');toggleNav()">Log in</button>'+
+    '<button class="btn btn-primary" onclick="openModal(\'signup\');toggleNav()">Sign up free</button>';
+}
+
+function renderNavUser(u){
+  const init=(u.user_metadata?.full_name||u.email||'U')[0].toUpperCase();
+  document.getElementById('navRight').innerHTML=
+    '<div class="user-avatar">'+init+
+    '<div class="user-dropdown">'+
+    '<button onclick="handleProPlan()">⭐ Upgrade to Pro</button>'+
+    '<button onclick="signOut()">Sign out</button>'+
+    '</div></div>';
+  document.getElementById('navMobileBtns').innerHTML=
+    '<button class="btn btn-pro" onclick="handleProPlan();toggleNav()">⭐ Upgrade to Pro</button>'+
+    '<button class="btn btn-ghost" onclick="signOut();toggleNav()">Sign out</button>';
+}
+
+async function signOut(){await sb.auth.signOut();showToast('Signed out');}
+
+/* ── PLAN HANDLERS ── */
+function handleFreePlan(){
+  if(currentUser){
+    showToast('You already have a free account! ✓','success');
+    return;
+  }
+  openModal('signup');
+}
+
+function handleProPlan(){
+  if(!currentUser){
+    // Not logged in → show login first with message
+    openModalWithMsg('signup','🚀 Create a free account first, then upgrade to Pro!');
+    return;
+  }
+  // Logged in → show coming soon (Stripe not yet integrated)
+  showProComingSoon();
+}
+
+function showProComingSoon(){
+  document.getElementById('authModal').classList.add('open');
+  document.getElementById('modalContent').innerHTML=
+    '<h2>Upgrade to Pro ⭐</h2>'+
+    '<div class="modal-highlight">'+
+    'You\'re logged in as <strong>'+currentUser.email+'</strong><br><br>'+
+    '💳 Payment integration is coming soon! We\'ll notify you at your email when Pro is available.'+
+    '</div>'+
+    '<button class="modal-submit" onclick="closeModal()">Got it!</button>'+
+    '<div class="modal-footer"><a href="/contact.html">Questions? Contact us →</a></div>';
+}
+
+function openModalWithMsg(mode, msg){
+  document.getElementById('authModal').classList.add('open');
+  const c=document.getElementById('modalContent');
+  c.innerHTML='<h2>Create account</h2>'+
+    '<div class="modal-highlight">'+msg+'</div>'+
+    '<button class="btn btn-google" onclick="signInGoogle()">'+
+    '<svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>'+
+    'Sign up with Google</button>'+
+    '<div class="modal-divider">or</div>'+
+    '<input class="modal-input" type="email" id="authEmail" placeholder="Email address">'+
+    '<input class="modal-input" type="password" id="authPass" placeholder="Password">'+
+    '<button class="modal-submit" onclick="signUpEmail()">Create Free Account</button>'+
+    '<div class="modal-footer">Have an account? <a onclick="openModal(\'login\')">Sign in</a></div>';
+}
+
+function openModal(mode){
+  document.getElementById('authModal').classList.add('open');
+  const c=document.getElementById('modalContent'),isLogin=mode==='login';
+  c.innerHTML='<h2>'+(isLogin?'Welcome back':'Create account')+'</h2>'+
+    '<p>'+(isLogin?'Sign in to your ToneFixer account':'Free 3-day trial — no credit card needed')+'</p>'+
+    '<button class="btn btn-google" onclick="signInGoogle()">'+
+    '<svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>'+
+    (isLogin?'Continue with Google':'Sign up with Google')+'</button>'+
+    '<div class="modal-divider">or</div>'+
+    '<input class="modal-input" type="email" id="authEmail" placeholder="Email address">'+
+    '<input class="modal-input" type="password" id="authPass" placeholder="Password">'+
+    '<button class="modal-submit" onclick="'+(isLogin?'signInEmail()':'signUpEmail()')+'">'+
+    (isLogin?'Sign In':'Create Free Account')+'</button>'+
+    '<div class="modal-footer">'+(isLogin?'No account? <a onclick="openModal(\'signup\')">Sign up free</a>':'Have an account? <a onclick="openModal(\'login\')">Sign in</a>')+'</div>';
+}
+
+function closeModal(){document.getElementById('authModal').classList.remove('open');}
+function closeModalOutside(e){if(e.target.id==='authModal')closeModal();}
+
+async function signInGoogle(){
+  const{error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:'https://tonefixer.online/pricing.html'}});
+  if(error)showToast(error.message,'error');
+}
+async function signInEmail(){
+  const email=document.getElementById('authEmail').value,pass=document.getElementById('authPass').value;
+  if(!email||!pass){showToast('Please fill in all fields','error');return;}
+  const{error}=await sb.auth.signInWithPassword({email,password:pass});
+  if(error)showToast(error.message,'error');
+}
+async function signUpEmail(){
+  const email=document.getElementById('authEmail').value,pass=document.getElementById('authPass').value;
+  if(!email||!pass){showToast('Please fill in all fields','error');return;}
+  if(pass.length<6){showToast('Password must be 6+ characters','error');return;}
+  const{error}=await sb.auth.signUp({email,password:pass});
+  if(error)showToast(error.message,'error');
+  else{closeModal();showToast('Check your email to confirm! ✓','success');}
+}
+
+function toggleFaq(btn){
+  const a=btn.nextElementSibling,isOpen=btn.classList.contains('open');
+  document.querySelectorAll('.faq-q').forEach(q=>{q.classList.remove('open');q.nextElementSibling.style.maxHeight='0';});
+  if(!isOpen){btn.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+}
+
+function showToast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast show '+type;
+  setTimeout(()=>t.className='toast',3000);
+}
+
+initAuth();
+</script>
+</body>
+</html>
