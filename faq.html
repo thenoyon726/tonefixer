@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - ToneFixer | Frequently Asked Questions</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="description" content="Frequently asked questions about ToneFixer — the AI-powered writing tone rewriter. Learn how it works, pricing, privacy, and more.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7993461749439016" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1c1c28;--border:#2a2a3d;--accent:#7c5cfc;--accent2:#00d4aa;--accent3:#ff6b6b;--text:#f0f0f8;--muted:#7a7a9d}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(10,10,15,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);text-decoration:none}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-right{display:flex;gap:.75rem;align-items:center}
+.btn{padding:.5rem 1.2rem;border-radius:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-ghost:hover{color:var(--text);border-color:var(--accent)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#6a4de8;transform:translateY(-1px)}
+.page-hero{padding:4rem 2rem 3rem;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;width:500px;height:400px;background:radial-gradient(circle,rgba(124,92,252,.12) 0%,transparent 70%);top:-50px;left:50%;transform:translateX(-50%);pointer-events:none}
+.page-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(124,92,252,.1);border:1px solid rgba(124,92,252,.3);border-radius:100px;padding:.3rem .9rem;font-size:.8rem;color:var(--accent);margin-bottom:1rem}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem}
+.page-hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-hero p{color:var(--muted);font-size:1rem;max-width:500px;margin:0 auto;line-height:1.7}
+.faq-wrapper{max-width:760px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.faq-category{margin-bottom:3rem}
+.cat-label{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:1.2rem;padding:.3rem .8rem;background:rgba(124,92,252,.08);border-radius:100px;border:1px solid rgba(124,92,252,.2)}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--text);padding:1.1rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'DM Sans',sans-serif;font-size:.97rem;font-weight:500;gap:1rem}
+.faq-q .icon{color:var(--muted);font-size:1.3rem;transition:transform .25s;flex-shrink:0}
+.faq-q.open .icon{transform:rotate(45deg);color:var(--accent)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a-inner{padding-bottom:1.1rem}
+.faq-a-inner p{color:var(--muted);font-size:.92rem;line-height:1.75}
+.faq-a-inner a{color:var(--accent);text-decoration:none}
+.faq-a-inner a:hover{text-decoration:underline}
+.search-bar{max-width:760px;margin:0 auto 2rem;padding:0 1.5rem}
+.search-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.85rem 1.2rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.95rem;transition:border-color .2s}
+.search-input:focus{outline:none;border-color:var(--accent)}
+.search-input::placeholder{color:var(--muted)}
+.no-results{text-align:center;padding:3rem;color:var(--muted);display:none}
+.no-results.show{display:block}
+.cta-section{background:linear-gradient(135deg,rgba(124,92,252,.1),rgba(0,212,170,.06));border-top:1px solid var(--border);padding:4rem 2rem;text-align:center}
+.cta-section h2{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:.8rem}
+.cta-section p{color:var(--muted);margin-bottom:2rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--muted);font-size:.85rem}
+footer a{color:var(--muted);text-decoration:none;margin:0 .75rem}
+footer a:hover{color:var(--text)}
+.highlight-match{background:rgba(124,92,252,.25);border-radius:3px;padding:0 2px}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">ToneFixer ✦</a>
+  <div class="nav-links">
+    <a href="/features.html">Features</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/faq.html" class="active">FAQ</a>
+    <a href="/pricing.html">Pricing</a>
+  </div>
+  <div class="nav-right">
+    <a href="/" class="btn btn-ghost">Try Tool →</a>
+    <a href="/pricing.html" class="btn btn-primary">Get Started</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-badge">✦ Help & Support</div>
+  <h1>Frequently Asked<br><span>Questions</span></h1>
+  <p>Everything you need to know about ToneFixer. Can't find an answer? <a href="/contact.html" style="color:var(--accent)">Contact us</a>.</p>
+</div>
+
+<div class="search-bar">
+  <input class="search-input" type="text" id="faqSearch" placeholder="🔍  Search questions..." oninput="searchFaq()">
+</div>
+
+<div class="faq-wrapper" id="faqWrapper">
+
+  <!-- GENERAL -->
+  <div class="faq-category" data-cat="general">
+    <div class="cat-label">📖 General</div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is ToneFixer? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>ToneFixer is an AI-powered writing tool that rewrites your text in the tone you choose. Whether you need to sound more professional for a work email, more friendly in a message, or more persuasive in a pitch — ToneFixer transforms your writing instantly while keeping your original meaning intact.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Who is ToneFixer for? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>ToneFixer is for anyone who communicates through writing — professionals writing business emails, students working on academic papers, job seekers crafting cover letters, entrepreneurs pitching ideas, or anyone who wants their message to come across clearly and confidently.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do I need to create an account to use ToneFixer? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>No! You can try ToneFixer once as a guest without creating an account. For more uses, simply create a free account and get 10 rewrites per day for 3 days — no credit card needed. After your trial, you can upgrade to Pro for unlimited rewrites.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What languages does ToneFixer support? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>ToneFixer works with virtually any language. Just write your text in English, Bengali, Spanish, French, Arabic, Hindi, Portuguese, German, or any other language — ToneFixer automatically detects your language and responds in the same one.</p></div></div></div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="faq-category" data-cat="how">
+    <div class="cat-label">⚙️ How It Works</div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does the AI rewrite my text? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>ToneFixer uses advanced AI language models to deeply understand the meaning and intent of your text. It then rewrites the content using vocabulary, sentence structure, and phrasing that matches the tone you selected — while always preserving your original message and key information.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What are the 8 tone styles? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p><strong style="color:var(--text)">Professional</strong> — Polished and business-appropriate. Great for work emails and reports.<br><br><strong style="color:var(--text)">Friendly</strong> — Warm and approachable. Perfect for team chats and casual outreach.<br><br><strong style="color:var(--text)">Formal</strong> — Structured and official. Ideal for legal documents and formal letters.<br><br><strong style="color:var(--text)">Casual</strong> — Relaxed and natural. Best for social media and informal messages.<br><br><strong style="color:var(--text)">Persuasive</strong> — Compelling and convincing. Perfect for sales pitches and proposals.<br><br><strong style="color:var(--text)">Empathetic</strong> — Caring and understanding. Great for apologies and sensitive topics.<br><br><strong style="color:var(--text)">Confident</strong> — Bold and assertive. Ideal for cover letters and negotiations.<br><br><strong style="color:var(--text)">Simplified</strong> — Clear and easy to understand. Great for complex topics explained simply.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does it take to rewrite my text? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Usually under 3 seconds! ToneFixer is built for speed. Just paste your text, select a tone, and click "Fix My Tone" — your rewritten text appears almost instantly.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there a character or word limit? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>There is no strict word limit for most texts. ToneFixer works best for single paragraphs to a few paragraphs of text. For very long documents, we recommend splitting the text into sections and rewriting each part separately for the best results.</p></div></div></div>
+  </div>
+
+  <!-- PRICING & TRIAL -->
+  <div class="faq-category" data-cat="pricing">
+    <div class="cat-label">💳 Pricing & Trial</div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is ToneFixer really free? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Yes! You can try it once as a guest without signing up. When you create a free account, you get 10 rewrites per day for 3 full days — completely free, no credit card required. After the trial, you can upgrade to Pro for $5/month for unlimited rewrites.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What happens after my 3-day free trial ends? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>After your 3-day free trial, you will need to upgrade to Pro ($5/month) to continue using ToneFixer. You will never be charged automatically — upgrading requires your explicit action and payment. Your account remains active even after the trial ends.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What does Pro include? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Pro gives you unlimited rewrites, all 8 tone styles, support for any language, priority processing speed, and early access to new features — all for just $5/month. See our <a href="/pricing.html">Pricing page</a> for full details.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I cancel my Pro subscription anytime? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Yes, absolutely. You can cancel your Pro subscription at any time with no penalties or hidden fees. After cancellation, your Pro access continues until the end of your current billing period.</p></div></div></div>
+  </div>
+
+  <!-- PRIVACY -->
+  <div class="faq-category" data-cat="privacy">
+    <div class="cat-label">🔒 Privacy & Security</div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is my text private and secure? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Absolutely. ToneFixer takes privacy very seriously. Your text is sent securely over an encrypted connection, processed by the AI, and immediately discarded. We never store, log, read, or share your text with anyone. Each request is completely private.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you use my text to train AI models? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>No. Your text is never used for AI training, data analysis, or any other purpose beyond generating your rewrite. We are committed to protecting your privacy and intellectual property.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What data do you collect when I create an account? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>When you create an account, we only collect your email address (or Google account info if you sign in with Google). We use this solely for authentication and account management. We do not sell your data to third parties. Read our full <a href="/privacy.html">Privacy Policy</a> for details.</p></div></div></div>
+  </div>
+
+  <!-- ACCOUNT -->
+  <div class="faq-category" data-cat="account">
+    <div class="cat-label">👤 Account</div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do I create an account? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Click "Sign up free" on the top right of any page. You can sign up with your Google account (one click!) or with your email address and a password. Account creation takes less than 30 seconds.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I sign in with Google? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Yes! We support Google Sign-In for quick and secure authentication. Just click "Sign up with Google" or "Continue with Google" and you'll be logged in instantly — no password needed.</p></div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">I forgot my password. What do I do? <span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Click "Log in" → then look for the "Forgot password?" link. Enter your email and we'll send you a reset link. If you signed up with Google, you don't need a password — just use "Continue with Google".</p></div></div></div>
+  </div>
+
+  <div class="no-results" id="noResults">
+    <p style="font-size:1.1rem;margin-bottom:.5rem">No results found 🔍</p>
+    <p>Try a different search term or <a href="/contact.html" style="color:var(--accent)">contact us</a> for help.</p>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>Still Have Questions?</h2>
+  <p>Our team is happy to help. Reach out anytime.</p>
+  <div class="cta-btns">
+    <a href="/contact.html" class="btn btn-primary" style="padding:.75rem 2rem;font-size:1rem;font-family:'Syne',sans-serif;font-weight:700">Contact Us →</a>
+    <a href="/" class="btn btn-ghost" style="padding:.75rem 2rem;font-size:1rem">Try ToneFixer Free</a>
+  </div>
+</div>
+
+<footer>
+  <p style="margin-bottom:.75rem">© 2026 ToneFixer. All rights reserved.</p>
+  <div>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/privacy.html">Terms of Service</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/blog.html">Blog</a>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn){
+  const a=btn.nextElementSibling,isOpen=btn.classList.contains('open');
+  document.querySelectorAll('.faq-q').forEach(q=>{q.classList.remove('open');q.nextElementSibling.style.maxHeight='0';});
+  if(!isOpen){btn.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+}
+
+function searchFaq(){
+  const q=document.getElementById('faqSearch').value.toLowerCase().trim();
+  const items=document.querySelectorAll('.faq-item');
+  const cats=document.querySelectorAll('.faq-category');
+  let anyVisible=false;
+  cats.forEach(cat=>{
+    let catVisible=false;
+    cat.querySelectorAll('.faq-item').forEach(item=>{
+      const text=item.textContent.toLowerCase();
+      if(!q||text.includes(q)){item.style.display='block';catVisible=true;anyVisible=true;}
+      else item.style.display='none';
+    });
+    cat.style.display=catVisible?'block':'none';
+  });
+  document.getElementById('noResults').classList.toggle('show',!anyVisible&&q.length>0);
+}
+</script>
+</body>
+</html>
