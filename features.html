@@ -12,83 +12,90 @@
 :root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1c1c28;--border:#2a2a3d;--accent:#7c5cfc;--accent2:#00d4aa;--accent3:#ff6b6b;--text:#f0f0f8;--muted:#7a7a9d}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(10,10,15,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);text-decoration:none}
-.nav-links{display:flex;gap:1.5rem}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}
-.nav-links a:hover,.nav-links a.active{color:var(--text)}
-.nav-right{display:flex;gap:.75rem;align-items:center}
 .btn{padding:.5rem 1.2rem;border-radius:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
 .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
 .btn-ghost:hover{color:var(--text);border-color:var(--accent)}
 .btn-primary{background:var(--accent);color:#fff}
 .btn-primary:hover{background:#6a4de8;transform:translateY(-1px)}
 
-/* PAGE HERO */
-.page-hero{padding:4rem 2rem 3rem;text-align:center;position:relative;overflow:hidden}
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);text-decoration:none;flex-shrink:0}
+.nav-links{display:none;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,15,0.98);backdrop-filter:blur(20px);z-index:99;padding:5rem 2rem 2rem}
+.nav-links.open{display:flex}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:1.15rem;padding:.85rem 0;border-bottom:1px solid var(--border);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-mobile-btns{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem}
+.nav-mobile-btns .btn{justify-content:center;padding:.8rem}
+.nav-right{display:none}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;z-index:101;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(min-width:768px){
+  .nav-links{display:flex!important;flex-direction:row;position:static;background:none;backdrop-filter:none;padding:0;gap:1.5rem;align-items:center}
+  .nav-links a{font-size:.9rem;padding:0;border-bottom:none}
+  .nav-mobile-btns{display:none}
+  .nav-right{display:flex;gap:.75rem;align-items:center}
+  .hamburger{display:none}
+}
+
+/* PAGE */
+.page-hero{padding:4rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden}
 .page-hero::before{content:'';position:absolute;width:600px;height:400px;background:radial-gradient(circle,rgba(124,92,252,.12) 0%,transparent 70%);top:-50px;left:50%;transform:translateX(-50%);pointer-events:none}
 .page-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(124,92,252,.1);border:1px solid rgba(124,92,252,.3);border-radius:100px;padding:.3rem .9rem;font-size:.8rem;color:var(--accent);margin-bottom:1rem}
-.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;margin-bottom:1rem}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-bottom:1rem;line-height:1.15}
 .page-hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.page-hero p{color:var(--muted);font-size:1.05rem;max-width:540px;margin:0 auto;line-height:1.7}
-
-/* MAIN FEATURES GRID */
+.page-hero p{color:var(--muted);font-size:1rem;max-width:540px;margin:0 auto;line-height:1.7}
 .section{max-width:960px;margin:0 auto;padding:3rem 1.5rem}
-.section-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.6rem}
-.section-title{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:.6rem}
-.section-sub{color:var(--muted);font-size:.95rem;margin-bottom:2.5rem;line-height:1.6}
-
-.features-big{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
-@media(max-width:700px){.features-big{grid-template-columns:1fr}}
-.feat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:border-color .2s}
+.section-label{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.6rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,4vw,1.8rem);font-weight:800;margin-bottom:.6rem}
+.section-sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem;line-height:1.6}
+.features-big{display:grid;grid-template-columns:1fr;gap:1rem;margin-bottom:1rem}
+@media(min-width:640px){.features-big{grid-template-columns:1fr 1fr}}
+.feat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:border-color .2s}
 .feat-card:hover{border-color:var(--accent)}
 .feat-card.highlight{border-color:rgba(124,92,252,.4);background:linear-gradient(135deg,rgba(124,92,252,.06),var(--surface))}
-.feat-icon{font-size:2.2rem;margin-bottom:1rem}
-.feat-card h3{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:.5rem}
-.feat-card p{color:var(--muted);font-size:.9rem;line-height:1.7}
-.feat-tag{display:inline-block;background:rgba(0,212,170,.12);border:1px solid rgba(0,212,170,.3);color:var(--accent2);font-size:.72rem;padding:.15rem .6rem;border-radius:100px;margin-top:.8rem}
-
-.features-small{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-@media(max-width:700px){.features-small{grid-template-columns:1fr}}
-.feat-small{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.4rem;transition:border-color .2s}
+.feat-icon{font-size:2rem;margin-bottom:.8rem}
+.feat-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+.feat-card p{color:var(--muted);font-size:.88rem;line-height:1.7}
+.feat-tag{display:inline-block;background:rgba(0,212,170,.12);border:1px solid rgba(0,212,170,.3);color:var(--accent2);font-size:.72rem;padding:.15rem .6rem;border-radius:100px;margin-top:.75rem}
+.features-small{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(min-width:640px){.features-small{grid-template-columns:repeat(3,1fr)}}
+.feat-small{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem;transition:border-color .2s}
 .feat-small:hover{border-color:var(--accent)}
-.feat-small-icon{font-size:1.6rem;margin-bottom:.7rem}
-.feat-small h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.3rem}
-.feat-small p{color:var(--muted);font-size:.83rem;line-height:1.6}
-
-/* TONES SHOWCASE */
-.tones-section{max-width:960px;margin:0 auto;padding:0 1.5rem 4rem}
-.tones-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-@media(max-width:700px){.tones-grid{grid-template-columns:repeat(2,1fr)}}
-.tone-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center;transition:all .2s;cursor:pointer}
+.feat-small-icon{font-size:1.5rem;margin-bottom:.6rem}
+.feat-small h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.3rem}
+.feat-small p{color:var(--muted);font-size:.82rem;line-height:1.6}
+.tones-section{max-width:960px;margin:0 auto;padding:0 1.5rem 3rem}
+.tones-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
+@media(min-width:640px){.tones-grid{grid-template-columns:repeat(4,1fr)}}
+.tone-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.1rem;text-align:center;transition:all .2s;cursor:pointer}
 .tone-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.tone-emoji{font-size:1.8rem;margin-bottom:.5rem}
-.tone-name{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.3rem}
-.tone-desc{color:var(--muted);font-size:.78rem;line-height:1.5}
-
-/* DEMO SECTION */
-.demo-section{max-width:960px;margin:0 auto;padding:0 1.5rem 4rem}
-.demo-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.demo-tab{padding:.4rem 1rem;border-radius:100px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.85rem;transition:all .2s}
+.tone-emoji{font-size:1.6rem;margin-bottom:.4rem}
+.tone-name{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;margin-bottom:.25rem}
+.tone-desc{color:var(--muted);font-size:.76rem;line-height:1.5}
+.demo-section{max-width:960px;margin:0 auto;padding:0 1.5rem 3rem}
+.demo-tabs{display:flex;gap:.4rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.demo-tab{padding:.35rem .85rem;border-radius:100px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.82rem;transition:all .2s}
 .demo-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .demo-panel{display:none}
-.demo-panel.active{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:start}
-@media(max-width:600px){.demo-panel.active{grid-template-columns:1fr}}
-.demo-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem}
-.demo-box .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem}
+.demo-panel.active{display:flex;flex-direction:column;gap:.75rem}
+@media(min-width:640px){.demo-panel.active{display:grid;grid-template-columns:1fr auto 1fr;align-items:start}}
+.demo-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.1rem}
+.demo-box .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
 .demo-box.before .label{color:var(--accent3)}
 .demo-box.after .label{color:var(--accent2)}
-.demo-box p{font-size:.92rem;line-height:1.65;color:var(--text)}
-.demo-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1.5rem;padding-top:2.2rem}
-
-/* CTA */
-.cta-section{background:linear-gradient(135deg,rgba(124,92,252,.1),rgba(0,212,170,.06));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 2rem;text-align:center;margin-bottom:0}
-.cta-section h2{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:.8rem}
-.cta-section p{color:var(--muted);margin-bottom:2rem;font-size:1rem}
-.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-
-footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--muted);font-size:.85rem}
-footer a{color:var(--muted);text-decoration:none;margin:0 .75rem}
+.demo-box p{font-size:.9rem;line-height:1.65;color:var(--text)}
+.demo-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1.5rem;padding:.5rem 0}
+@media(min-width:640px){.demo-arrow{padding-top:2rem}}
+.cta-section{background:linear-gradient(135deg,rgba(124,92,252,.1),rgba(0,212,170,.06));border-top:1px solid var(--border);padding:3.5rem 1.5rem;text-align:center}
+.cta-section h2{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,4vw,2rem);font-weight:800;margin-bottom:.8rem}
+.cta-section p{color:var(--muted);margin-bottom:1.75rem;font-size:.95rem}
+.cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+footer{border-top:1px solid var(--border);padding:1.75rem;text-align:center;color:var(--muted);font-size:.85rem}
+footer a{color:var(--muted);text-decoration:none;margin:0 .6rem}
 footer a:hover{color:var(--text)}
 </style>
 </head>
@@ -96,16 +103,23 @@ footer a:hover{color:var(--text)}
 
 <nav>
   <a href="/" class="logo">ToneFixer ✦</a>
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="/features.html" class="active">Features</a>
     <a href="/blog.html">Blog</a>
     <a href="/faq.html">FAQ</a>
     <a href="/pricing.html">Pricing</a>
+    <div class="nav-mobile-btns">
+      <a href="/" class="btn btn-ghost">Try Tool →</a>
+      <a href="/pricing.html" class="btn btn-primary">Get Started</a>
+    </div>
   </div>
   <div class="nav-right">
     <a href="/" class="btn btn-ghost">Try Tool →</a>
     <a href="/pricing.html" class="btn btn-primary">Get Started</a>
   </div>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <div class="page-hero">
@@ -114,121 +128,42 @@ footer a:hover{color:var(--text)}
   <p>From casual messages to professional emails — ToneFixer gives you the right tone every time, in any language.</p>
 </div>
 
-<!-- MAIN FEATURES -->
 <div class="section">
   <div class="section-label">Core Features</div>
   <div class="section-title">What Makes ToneFixer Special</div>
   <div class="section-sub">Built for anyone who needs to communicate clearly and confidently</div>
-
   <div class="features-big">
-    <div class="feat-card highlight">
-      <div class="feat-icon">🤖</div>
-      <h3>Advanced AI Rewriting</h3>
-      <p>Powered by state-of-the-art AI language models, ToneFixer understands the full context of your message and rewrites it naturally — not just word-for-word replacement.</p>
-      <span class="feat-tag">Powered by Claude AI</span>
-    </div>
-    <div class="feat-card highlight">
-      <div class="feat-icon">🌍</div>
-      <h3>Works in Any Language</h3>
-      <p>Write in English, Bengali, Spanish, French, Arabic, Hindi, or any other language. ToneFixer automatically detects your language and responds in the same one.</p>
-      <span class="feat-tag">100+ Languages</span>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">🎯</div>
-      <h3>8 Distinct Tone Styles</h3>
-      <p>Choose from Professional, Friendly, Formal, Casual, Persuasive, Empathetic, Confident, and Simplified. Each tone is fine-tuned for different situations and audiences.</p>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">⚡</div>
-      <h3>Instant Results</h3>
-      <p>Get your rewritten text in under 3 seconds. No waiting, no queues — just paste your text, pick a tone, and get a perfect rewrite immediately.</p>
-    </div>
+    <div class="feat-card highlight"><div class="feat-icon">🤖</div><h3>Advanced AI Rewriting</h3><p>Powered by state-of-the-art AI language models, ToneFixer understands the full context of your message and rewrites it naturally — not just word-for-word replacement.</p><span class="feat-tag">Powered by Claude AI</span></div>
+    <div class="feat-card highlight"><div class="feat-icon">🌍</div><h3>Works in Any Language</h3><p>Write in English, Bengali, Spanish, French, Arabic, Hindi, or any other language. ToneFixer automatically detects your language and responds in the same one.</p><span class="feat-tag">100+ Languages</span></div>
+    <div class="feat-card"><div class="feat-icon">🎯</div><h3>8 Distinct Tone Styles</h3><p>Choose from Professional, Friendly, Formal, Casual, Persuasive, Empathetic, Confident, and Simplified. Each tone is fine-tuned for different situations.</p></div>
+    <div class="feat-card"><div class="feat-icon">⚡</div><h3>Instant Results</h3><p>Get your rewritten text in under 3 seconds. No waiting, no queues — just paste your text, pick a tone, and get a perfect rewrite immediately.</p></div>
   </div>
-
   <div class="features-small">
-    <div class="feat-small">
-      <div class="feat-small-icon">🔒</div>
-      <h4>100% Private</h4>
-      <p>Your text is never stored, logged, or shared. Every request is processed and immediately discarded.</p>
-    </div>
-    <div class="feat-small">
-      <div class="feat-small-icon">📋</div>
-      <h4>One-Click Copy</h4>
-      <p>Copy your rewritten text to clipboard instantly with one click. No highlighting needed.</p>
-    </div>
-    <div class="feat-small">
-      <div class="feat-small-icon">📱</div>
-      <h4>Works Everywhere</h4>
-      <p>Fully responsive design — works perfectly on desktop, tablet, and mobile devices.</p>
-    </div>
-    <div class="feat-small">
-      <div class="feat-small-icon">🚀</div>
-      <h4>No Install Needed</h4>
-      <p>100% browser-based. No app to download, no software to install — just open and use.</p>
-    </div>
-    <div class="feat-small">
-      <div class="feat-small-icon">✉️</div>
-      <h4>Email Optimized</h4>
-      <p>Specially trained on professional email patterns for the most natural-sounding rewrites.</p>
-    </div>
-    <div class="feat-small">
-      <div class="feat-small-icon">🔄</div>
-      <h4>Try Multiple Tones</h4>
-      <p>Switch between tones instantly to find the perfect voice for your message.</p>
-    </div>
+    <div class="feat-small"><div class="feat-small-icon">🔒</div><h4>100% Private</h4><p>Your text is never stored, logged, or shared. Every request is processed and immediately discarded.</p></div>
+    <div class="feat-small"><div class="feat-small-icon">📋</div><h4>One-Click Copy</h4><p>Copy your rewritten text to clipboard instantly with one click.</p></div>
+    <div class="feat-small"><div class="feat-small-icon">📱</div><h4>Works Everywhere</h4><p>Fully responsive — works perfectly on desktop, tablet, and mobile.</p></div>
+    <div class="feat-small"><div class="feat-small-icon">🚀</div><h4>No Install Needed</h4><p>100% browser-based. No app to download, no software to install.</p></div>
+    <div class="feat-small"><div class="feat-small-icon">✉️</div><h4>Email Optimized</h4><p>Specially trained on professional email patterns for natural rewrites.</p></div>
+    <div class="feat-small"><div class="feat-small-icon">🔄</div><h4>Try Multiple Tones</h4><p>Switch between tones instantly to find the perfect voice for your message.</p></div>
   </div>
 </div>
 
-<!-- TONES -->
 <div class="tones-section">
   <div class="section-label">Tone Library</div>
   <div class="section-title">8 Tones for Every Situation</div>
   <div class="section-sub">Each tone is carefully crafted for specific use cases</div>
   <div class="tones-grid">
-    <div class="tone-card">
-      <div class="tone-emoji">💼</div>
-      <div class="tone-name">Professional</div>
-      <div class="tone-desc">Perfect for work emails, reports, and business communication</div>
-    </div>
-    <div class="tone-card">
-      <div class="tone-emoji">😊</div>
-      <div class="tone-name">Friendly</div>
-      <div class="tone-desc">Warm and approachable — great for team messages and light conversations</div>
-    </div>
-    <div class="tone-card">
-      <div class="tone-emoji">🎩</div>
-      <div class="tone-name">Formal</div>
-      <div class="tone-desc">Official and structured for legal documents, academic writing, and formal letters</div>
-    </div>
-    <div class="tone-card">
-      <div class="tone-emoji">👋</div>
-      <div class="tone-name">Casual</div>
-      <div class="tone-desc">Relaxed and natural for social media, chats, and informal messages</div>
-    </div>
-    <div class="tone-card">
-      <div class="tone-emoji">🎯</div>
-      <div class="tone-name">Persuasive</div>
-      <div class="tone-desc">Compelling and convincing for sales, pitches, and proposals</div>
-    </div>
-    <div class="tone-card">
-      <div class="tone-emoji">💙</div>
-      <div class="tone-name">Empathetic</div>
-      <div class="tone-desc">Caring and understanding for apologies, support messages, and sensitive topics</div>
-    </div>
-    <div class="tone-card">
-      <div class="tone-emoji">⚡</div>
-      <div class="tone-name">Confident</div>
-      <div class="tone-desc">Bold and assertive for cover letters, negotiations, and leadership messages</div>
-    </div>
-    <div class="tone-card">
-      <div class="tone-emoji">✂️</div>
-      <div class="tone-name">Simplified</div>
-      <div class="tone-desc">Clear and easy to understand — great for explaining complex topics simply</div>
-    </div>
+    <div class="tone-card" onclick="location.href='/'"><div class="tone-emoji">💼</div><div class="tone-name">Professional</div><div class="tone-desc">Work emails, reports, business communication</div></div>
+    <div class="tone-card" onclick="location.href='/'"><div class="tone-emoji">😊</div><div class="tone-name">Friendly</div><div class="tone-desc">Team messages and light conversations</div></div>
+    <div class="tone-card" onclick="location.href='/'"><div class="tone-emoji">🎩</div><div class="tone-name">Formal</div><div class="tone-desc">Legal documents and formal letters</div></div>
+    <div class="tone-card" onclick="location.href='/'"><div class="tone-emoji">👋</div><div class="tone-name">Casual</div><div class="tone-desc">Social media and informal messages</div></div>
+    <div class="tone-card" onclick="location.href='/'"><div class="tone-emoji">🎯</div><div class="tone-name">Persuasive</div><div class="tone-desc">Sales, pitches, and proposals</div></div>
+    <div class="tone-card" onclick="location.href='/'"><div class="tone-emoji">💙</div><div class="tone-name">Empathetic</div><div class="tone-desc">Apologies and sensitive topics</div></div>
+    <div class="tone-card" onclick="location.href='/'"><div class="tone-emoji">⚡</div><div class="tone-name">Confident</div><div class="tone-desc">Cover letters and negotiations</div></div>
+    <div class="tone-card" onclick="location.href='/'"><div class="tone-emoji">✂️</div><div class="tone-name">Simplified</div><div class="tone-desc">Complex topics explained simply</div></div>
   </div>
 </div>
 
-<!-- DEMO -->
 <div class="demo-section">
   <div class="section-label">Live Examples</div>
   <div class="section-title">See the Difference</div>
@@ -239,49 +174,32 @@ footer a:hover{color:var(--text)}
     <button class="demo-tab" data-panel="2">Job Application</button>
     <button class="demo-tab" data-panel="3">Sales Pitch</button>
   </div>
-  <div class="demo-panel active" id="dp-0">
-    <div class="demo-box before"><div class="label">Before</div><p>hey can u send me the files asap i need them for the meeting tomorrow its really urgent</p></div>
-    <div class="demo-arrow">→</div>
-    <div class="demo-box after"><div class="label">After — Professional</div><p>Hi, I hope you're doing well. Could you please send me the files at your earliest convenience? I require them for an important meeting tomorrow and would greatly appreciate your prompt assistance.</p></div>
-  </div>
-  <div class="demo-panel" id="dp-1">
-    <div class="demo-box before"><div class="label">Before</div><p>im really sorry i messed up i didnt mean to cause problems</p></div>
-    <div class="demo-arrow">→</div>
-    <div class="demo-box after"><div class="label">After — Empathetic</div><p>I sincerely apologize for my mistake and the difficulties it may have caused. I want you to know that it was never my intention to create any problems, and I truly value our relationship.</p></div>
-  </div>
-  <div class="demo-panel" id="dp-2">
-    <div class="demo-box before"><div class="label">Before</div><p>i want this job i know how to code and have done projects before</p></div>
-    <div class="demo-arrow">→</div>
-    <div class="demo-box after"><div class="label">After — Confident</div><p>I am genuinely excited about this opportunity and bring proven technical expertise in software development. My hands-on project experience has equipped me to make an immediate and meaningful contribution to your team.</p></div>
-  </div>
-  <div class="demo-panel" id="dp-3">
-    <div class="demo-box before"><div class="label">Before</div><p>our app is good and helps people save time and money</p></div>
-    <div class="demo-arrow">→</div>
-    <div class="demo-box after"><div class="label">After — Persuasive</div><p>Our app is transforming the way people work — saving them valuable time and significant money every single day. Join thousands of satisfied users who have already discovered a smarter, more efficient way to manage their workflow.</p></div>
-  </div>
+  <div class="demo-panel active" id="dp-0"><div class="demo-box before"><div class="label">Before</div><p>hey can u send me the files asap i need them for the meeting tomorrow</p></div><div class="demo-arrow">→</div><div class="demo-box after"><div class="label">After — Professional</div><p>Hi, could you please send me the files at your earliest convenience? I require them for an important meeting tomorrow and would greatly appreciate your prompt assistance.</p></div></div>
+  <div class="demo-panel" id="dp-1"><div class="demo-box before"><div class="label">Before</div><p>im really sorry i messed up i didnt mean to cause problems</p></div><div class="demo-arrow">→</div><div class="demo-box after"><div class="label">After — Empathetic</div><p>I sincerely apologize for my mistake and any difficulties it may have caused. It was never my intention to create problems, and I truly value our relationship.</p></div></div>
+  <div class="demo-panel" id="dp-2"><div class="demo-box before"><div class="label">Before</div><p>i want this job i know how to code and have done projects before</p></div><div class="demo-arrow">→</div><div class="demo-box after"><div class="label">After — Confident</div><p>I am genuinely excited about this opportunity and bring proven technical expertise. My hands-on project experience has equipped me to make an immediate contribution to your team.</p></div></div>
+  <div class="demo-panel" id="dp-3"><div class="demo-box before"><div class="label">Before</div><p>our app is good and helps people save time and money</p></div><div class="demo-arrow">→</div><div class="demo-box after"><div class="label">After — Persuasive</div><p>Our app is transforming the way people work — saving valuable time and significant money every day. Join thousands who have already discovered a smarter, more efficient workflow.</p></div></div>
 </div>
 
-<!-- CTA -->
 <div class="cta-section">
   <h2>Ready to Fix Your Tone?</h2>
-  <p>Start free — no credit card needed. 10 rewrites/day for 3 days.</p>
+  <p>Start free — no credit card needed.</p>
   <div class="cta-btns">
-    <a href="/" class="btn btn-primary" style="padding:.75rem 2rem;font-size:1rem;font-family:'Syne',sans-serif;font-weight:700">Try ToneFixer Free →</a>
-    <a href="/pricing.html" class="btn btn-ghost" style="padding:.75rem 2rem;font-size:1rem">See Pricing</a>
+    <a href="/" class="btn btn-primary" style="padding:.75rem 1.8rem;font-size:1rem;font-family:'Syne',sans-serif;font-weight:700">Try ToneFixer Free →</a>
+    <a href="/pricing.html" class="btn btn-ghost" style="padding:.75rem 1.8rem;font-size:1rem">See Pricing</a>
   </div>
 </div>
 
 <footer>
-  <p style="margin-bottom:.75rem">© 2026 ToneFixer. All rights reserved.</p>
-  <div>
-    <a href="/privacy.html">Privacy Policy</a>
-    <a href="/privacy.html">Terms of Service</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/blog.html">Blog</a>
-  </div>
+  <p style="margin-bottom:.6rem">© 2026 ToneFixer. All rights reserved.</p>
+  <div><a href="/privacy.html">Privacy Policy</a><a href="/privacy.html">Terms</a><a href="/contact.html">Contact</a><a href="/blog.html">Blog</a></div>
 </footer>
 
 <script>
+function toggleNav(){
+  const n=document.getElementById('navLinks'),h=document.getElementById('hamburger');
+  n.classList.toggle('open');h.classList.toggle('open');
+  document.body.style.overflow=n.classList.contains('open')?'hidden':'';
+}
 document.querySelectorAll('.demo-tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.demo-tab').forEach(t=>t.classList.remove('active'));
@@ -289,9 +207,6 @@ document.querySelectorAll('.demo-tab').forEach(tab=>{
     tab.classList.add('active');
     document.getElementById('dp-'+tab.dataset.panel).classList.add('active');
   });
-});
-document.querySelectorAll('.tone-card').forEach(card=>{
-  card.addEventListener('click',()=>window.location.href='/');
 });
 </script>
 </body>
