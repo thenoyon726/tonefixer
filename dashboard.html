@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - ToneFixer</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--accent:#059669;--accent2:#047857;--accent3:#ef4444;--text:#1e293b;--muted:#64748b;--pro:#f59e0b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh}
+
+/* ── LAYOUT ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:260px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;transition:transform .3s}
+.sidebar-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.sidebar-logo{font-size:18px;font-weight:700;color:var(--accent);text-decoration:none}
+.sidebar-nav{flex:1;padding:1rem 0;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:.75rem;padding:.7rem 1.5rem;color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:all .2s;cursor:pointer;border:none;background:none;width:100%;text-align:left}
+.nav-item:hover{background:#f0fdf4;color:var(--accent)}
+.nav-item.active{background:#f0fdf4;color:var(--accent);border-right:3px solid var(--accent)}
+.nav-item .icon{font-size:1.1rem;width:20px;text-align:center}
+.nav-section{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;padding:.75rem 1.5rem .35rem;margin-top:.5rem}
+.sidebar-footer{padding:1rem 1.5rem;border-top:1px solid var(--border)}
+.user-card{display:flex;align-items:center;gap:.75rem;padding:.6rem;border-radius:10px;background:var(--bg)}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:.9rem;flex-shrink:0}
+.user-info{flex:1;min-width:0}
+.user-name{font-size:.88rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.user-plan{font-size:.72rem;color:var(--muted)}
+.user-plan.pro{color:var(--pro);font-weight:600}
+
+/* ── MAIN ── */
+.main{margin-left:260px;flex:1;min-height:100vh}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-title{font-size:1.1rem;font-weight:700;color:var(--text)}
+.topbar-right{display:flex;align-items:center;gap:.75rem}
+.content{padding:2rem}
+
+/* ── HAMBURGER ── */
+.hamburger-btn{display:none;background:none;border:none;cursor:pointer;padding:.4rem;font-size:1.3rem;color:var(--text)}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:99}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-overlay.open{display:block}
+  .main{margin-left:0}
+  .hamburger-btn{display:block}
+  .content{padding:1.25rem}
+}
+
+/* ── CARDS ── */
+.btn{padding:.5rem 1.1rem;border-radius:8px;border:none;cursor:pointer;font-size:.88rem;font-weight:500;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent2)}
+.btn-ghost{background:transparent;color:var(--muted);border:1.5px solid var(--border)}
+.btn-ghost:hover{color:var(--text);border-color:var(--accent)}
+.btn-danger{background:#fef2f2;color:var(--accent3);border:1.5px solid #fecaca}
+.btn-danger:hover{background:#fee2e2}
+.btn-pro{background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:700}
+.btn-pro:hover{transform:translateY(-1px)}
+
+.page{display:none}
+.page.active{display:block}
+
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem}
+.stat-card .label{font-size:.8rem;color:var(--muted);margin-bottom:.5rem;font-weight:500}
+.stat-card .value{font-size:2rem;font-weight:800;color:var(--text)}
+.stat-card .sub{font-size:.78rem;color:var(--muted);margin-top:.3rem}
+.stat-card.green .value{color:var(--accent)}
+.stat-card.orange .value{color:var(--pro)}
+.stat-card.red .value{color:var(--accent3)}
+
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.card-title .icon{font-size:1.2rem}
+
+/* PROGRESS BAR */
+.progress-wrap{margin-bottom:.5rem}
+.progress-label{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);margin-bottom:.4rem}
+.progress-bar{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;background:var(--accent);transition:width .6s ease}
+.progress-fill.warn{background:var(--pro)}
+.progress-fill.danger{background:var(--accent3)}
+
+/* FORM */
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.4rem}
+.form-input{width:100%;background:#f8fafc;border:1.5px solid var(--border);border-radius:8px;padding:.65rem 1rem;color:var(--text);font-family:inherit;font-size:.9rem}
+.form-input:focus{outline:none;border-color:var(--accent);background:#fff}
+.form-input:disabled{opacity:.6;cursor:not-allowed}
+.form-hint{font-size:.76rem;color:var(--muted);margin-top:.3rem}
+
+/* ALERT */
+.alert{padding:.85rem 1rem;border-radius:8px;font-size:.88rem;margin-bottom:1rem;display:flex;align-items:flex-start;gap:.6rem}
+.alert.info{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+.alert.warning{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.alert.success{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+.alert.danger{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+
+/* HELP */
+.help-item{border-bottom:1px solid var(--border);padding:1rem 0}
+.help-item:last-child{border-bottom:none}
+.help-item a{color:var(--accent);text-decoration:none;font-weight:500;font-size:.9rem;display:flex;align-items:center;gap:.5rem}
+.help-item a:hover{text-decoration:underline}
+.help-item p{font-size:.82rem;color:var(--muted);margin-top:.25rem}
+
+/* PLAN BADGE */
+.plan-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .75rem;border-radius:100px;font-size:.75rem;font-weight:600}
+.plan-badge.free{background:#ecfdf5;color:var(--accent);border:1px solid #a7f3d0}
+.plan-badge.pro{background:#fffbeb;color:#92400e;border:1px solid #fde68a}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:1.25rem 0}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#0f172a;color:#fff;border-radius:10px;padding:.7rem 1.1rem;font-size:.88rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all .3s;max-width:280px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{background:var(--accent)}
+.toast.error{background:var(--accent3)}
+
+/* DELETE CONFIRM */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:#fff;border-radius:16px;padding:2rem;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h3{font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text)}
+.modal p{font-size:.88rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6}
+.modal-btns{display:flex;gap:.75rem;justify-content:flex-end}
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="/" class="sidebar-logo">✦ ToneFixer</a>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" onclick="showPage('overview')"><span class="icon">📊</span> Overview</button>
+      <button class="nav-item" onclick="showPage('profile')"><span class="icon">👤</span> Profile Settings</button>
+      <button class="nav-item" onclick="showPage('billing')"><span class="icon">💳</span> Billing & Plan</button>
+      <div class="nav-section">Support</div>
+      <button class="nav-item" onclick="showPage('help')"><span class="icon">❓</span> Help & Support</button>
+      <a href="/" class="nav-item"><span class="icon">🔧</span> Use ToneFixer</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-avatar" id="sidebarAvatar">?</div>
+        <div class="user-info">
+          <div class="user-name" id="sidebarName">Loading...</div>
+          <div class="user-plan free" id="sidebarPlan">Free Plan</div>
+        </div>
+      </div>
+      <button class="nav-item" style="margin-top:.5rem;color:var(--accent3)" onclick="confirmSignOut()"><span class="icon">🚪</span> Sign Out</button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <button class="hamburger-btn" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-title" id="topbarTitle">Overview</div>
+      </div>
+      <div class="topbar-right">
+        <a href="/" class="btn btn-primary" style="font-size:.82rem;padding:.4rem .9rem">← Back to Tool</a>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ── OVERVIEW ── -->
+      <div class="page active" id="page-overview">
+        <div class="stats-grid">
+          <div class="stat-card green">
+            <div class="label">Rewrites Today</div>
+            <div class="value" id="usedToday">0</div>
+            <div class="sub" id="usedSub">of 10 daily limit</div>
+          </div>
+          <div class="stat-card orange">
+            <div class="label">Trial Days Left</div>
+            <div class="value" id="daysLeft">3</div>
+            <div class="sub">Free trial period</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Current Plan</div>
+            <div class="value" style="font-size:1.4rem" id="planName">Free</div>
+            <div class="sub">Upgrade for unlimited</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="icon">📈</span> Usage This Week</div>
+          <div class="progress-wrap">
+            <div class="progress-label">
+              <span>Daily Rewrites Used</span>
+              <span id="progressLabel">0 / 10</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+          </div>
+          <div class="progress-wrap" style="margin-top:1rem">
+            <div class="progress-label">
+              <span>Trial Progress</span>
+              <span id="trialLabel">Day 0 of 3</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill warn" id="trialFill" style="width:0%"></div></div>
+          </div>
+        </div>
+
+        <div class="card" id="upgradeCard">
+          <div class="card-title"><span class="icon">⭐</span> Upgrade to Pro</div>
+          <div class="alert warning">🚀 Unlock unlimited rewrites, priority processing, and early access to new features for just $5/month.</div>
+          <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+            <button class="btn btn-pro" onclick="showPage('billing')">Upgrade to Pro →</button>
+            <a href="/pricing.html" class="btn btn-ghost">See Pricing</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="icon">🚀</span> Quick Actions</div>
+          <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+            <a href="/" class="btn btn-primary">✦ Rewrite Text</a>
+            <button class="btn btn-ghost" onclick="showPage('profile')">👤 Edit Profile</button>
+            <button class="btn btn-ghost" onclick="showPage('help')">❓ Get Help</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PROFILE ── -->
+      <div class="page" id="page-profile">
+        <div class="card">
+          <div class="card-title"><span class="icon">👤</span> Profile Information</div>
+          <div class="form-group">
+            <label>Display Name</label>
+            <input class="form-input" type="text" id="profileName" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input class="form-input" type="email" id="profileEmail" disabled>
+            <div class="form-hint">Email cannot be changed. Contact support if needed.</div>
+          </div>
+          <div class="form-group">
+            <label>Member Since</label>
+            <input class="form-input" type="text" id="profileJoined" disabled>
+          </div>
+          <button class="btn btn-primary" onclick="updateProfile()">Save Changes</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="icon">🔒</span> Change Password</div>
+          <div class="alert info">💡 A password reset link will be sent to your email address.</div>
+          <div class="form-group">
+            <label>New Password</label>
+            <input class="form-input" type="password" id="newPass" placeholder="New password (min. 8 characters)">
+          </div>
+          <div class="form-group">
+            <label>Confirm New Password</label>
+            <input class="form-input" type="password" id="confirmPass" placeholder="Confirm new password">
+          </div>
+          <button class="btn btn-primary" onclick="changePassword()">Update Password</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="color:var(--accent3)"><span class="icon">⚠️</span> Danger Zone</div>
+          <div class="alert danger">Deleting your account is permanent and cannot be undone. All your data will be lost.</div>
+          <button class="btn btn-danger" onclick="showDeleteConfirm()">🗑️ Delete My Account</button>
+        </div>
+      </div>
+
+      <!-- ── BILLING ── -->
+      <div class="page" id="page-billing">
+        <div class="card">
+          <div class="card-title"><span class="icon">💳</span> Current Plan</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+            <div>
+              <div style="font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:.3rem" id="billingPlanName">Free Trial</div>
+              <div style="font-size:.88rem;color:var(--muted)" id="billingPlanDesc">10 rewrites/day for 3 days</div>
+            </div>
+            <span class="plan-badge free" id="billingBadge">Free</span>
+          </div>
+          <div class="divider"></div>
+          <div style="font-size:.88rem;color:var(--muted);line-height:1.7">
+            <div>✓ 1 guest try (no account needed)</div>
+            <div>✓ 10 rewrites/day during trial</div>
+            <div>✓ All 8 tone styles</div>
+            <div>✓ Any language</div>
+          </div>
+        </div>
+
+        <div class="card" style="border-color:rgba(5,150,105,.4);background:linear-gradient(135deg,rgba(5,150,105,.04),#fff)">
+          <div class="card-title"><span class="icon">🚀</span> Pro Plan — $5/month</div>
+          <div class="alert info">🎉 Upgrade to Pro and get unlimited rewrites, priority processing, and early access to all new features!</div>
+          <div style="font-size:.88rem;color:var(--muted);line-height:1.8;margin-bottom:1.25rem">
+            <div>✓ <strong>Unlimited</strong> rewrites every day</div>
+            <div>✓ All 8 tone styles</div>
+            <div>✓ Any language</div>
+            <div>✓ Priority processing speed</div>
+            <div>✓ Early access to new features</div>
+            <div>✓ Priority support</div>
+          </div>
+          <div class="alert warning" style="margin-bottom:1rem">💳 Payment system coming soon! We'll notify you at your email when Pro is available.</div>
+          <button class="btn btn-pro">Upgrade to Pro → $5/month</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="icon">❓</span> Billing Questions</div>
+          <div class="help-item">
+            <a href="/pricing.html">📋 View Full Pricing Details →</a>
+            <p>Compare Free and Pro plans side by side</p>
+          </div>
+          <div class="help-item">
+            <a href="/contact.html">📧 Contact Billing Support →</a>
+            <p>Questions about payments or subscriptions</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── HELP ── -->
+      <div class="page" id="page-help">
+        <div class="card">
+          <div class="card-title"><span class="icon">🚀</span> Getting Started</div>
+          <div class="help-item">
+            <a href="/">✦ Use ToneFixer Now →</a>
+            <p>Paste your text, choose a tone, and click "Fix My Tone"</p>
+          </div>
+          <div class="help-item">
+            <a href="/features.html">⚡ View All Features →</a>
+            <p>Learn about all 8 tone styles and advanced features</p>
+          </div>
+          <div class="help-item">
+            <a href="/faq.html">❓ Frequently Asked Questions →</a>
+            <p>Answers to the most common questions about ToneFixer</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="icon">📋</span> Policies & Legal</div>
+          <div class="help-item">
+            <a href="/privacy.html">🔒 Privacy Policy →</a>
+            <p>How we collect, use, and protect your data</p>
+          </div>
+          <div class="help-item">
+            <a href="/privacy.html">📄 Terms of Service →</a>
+            <p>Rules and guidelines for using ToneFixer</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="icon">📧</span> Contact Support</div>
+          <div class="alert info">Need help? Our team is happy to assist you with any questions or issues.</div>
+          <div class="help-item">
+            <a href="/contact.html">📩 Contact Us →</a>
+            <p>Send us a message — we usually reply within 24 hours</p>
+          </div>
+          <div class="help-item">
+            <a href="mailto:tonefixerai@gmail.com">✉️ Email: tonefixerai@gmail.com →</a>
+            <p>Direct email support</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="icon">📝</span> Blog & Resources</div>
+          <div class="help-item">
+            <a href="/blog.html">📰 ToneFixer Blog →</a>
+            <p>Writing tips, communication guides, and AI writing insights</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal">
+    <h3>⚠️ Delete Account?</h3>
+    <p>This action is <strong>permanent and cannot be undone</strong>. Your account, usage history, and all data will be permanently deleted.</p>
+    <div class="form-group">
+      <label>Type <strong>DELETE</strong> to confirm</label>
+      <input class="form-input" type="text" id="deleteConfirmInput" placeholder="Type DELETE here">
+    </div>
+    <div class="modal-btns">
+      <button class="btn btn-ghost" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn btn-danger" onclick="deleteAccount()">🗑️ Delete Forever</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPABASE_URL='https://akijndyfjuumfeorqpko.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFraWpuZHlmanV1bWZlb3JxcGtvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzMDExNTUsImV4cCI6MjA5NTg3NzE1NX0.Sc4Qv-7m_Cmb3A2r2PMnzmnsKclu0XC6qxf0mVK7ZbA';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+let currentUser=null;
+
+// ── INIT ──
+async function init(){
+  const{data:{session}}=await sb.auth.getSession();
+  if(!session){window.location.href='/';return;}
+  currentUser=session.user;
+  loadUserData();
+  loadUsageData();
+}
+
+function loadUserData(){
+  const u=currentUser;
+  const name=u.user_metadata?.full_name||u.email?.split('@')[0]||'User';
+  const email=u.email||'';
+  const joined=new Date(u.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const init=name[0].toUpperCase();
+
+  document.getElementById('sidebarAvatar').textContent=init;
+  document.getElementById('sidebarName').textContent=name;
+  document.getElementById('profileName').value=name;
+  document.getElementById('profileEmail').value=email;
+  document.getElementById('profileJoined').value=joined;
+}
+
+function loadUsageData(){
+  const today=new Date().toDateString();
+  const d=JSON.parse(localStorage.getItem('tfUsage')||'{}');
+  const used=d.date===today?d.count||0:0;
+  const trialStart=d.trialStart?new Date(d.trialStart):null;
+  const daysUsed=trialStart?Math.floor((new Date()-trialStart)/(1000*60*60*24)):0;
+  const daysLeft=Math.max(0,3-daysUsed);
+  const rem=10-used;
+
+  document.getElementById('usedToday').textContent=used;
+  document.getElementById('daysLeft').textContent=daysLeft;
+  document.getElementById('usedSub').textContent='of 10 daily limit ('+(rem>0?rem+' remaining':'limit reached')+')';
+  document.getElementById('progressLabel').textContent=used+' / 10';
+  document.getElementById('trialLabel').textContent='Day '+daysUsed+' of 3';
+
+  const pct=Math.min(100,(used/10)*100);
+  const bar=document.getElementById('progressFill');
+  bar.style.width=pct+'%';
+  bar.className='progress-fill'+(pct>=80?' danger':pct>=50?' warn':'');
+
+  const tpct=Math.min(100,(daysUsed/3)*100);
+  document.getElementById('trialFill').style.width=tpct+'%';
+
+  if(daysLeft<=0){
+    document.getElementById('daysLeft').style.color='var(--accent3)';
+  }
+}
+
+// ── NAVIGATION ──
+const pageTitles={overview:'Overview',profile:'Profile Settings',billing:'Billing & Plan',help:'Help & Support'};
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('onclick')===`showPage('${id}')`)n.classList.add('active');});
+  document.getElementById('topbarTitle').textContent=pageTitles[id]||id;
+  closeSidebar();
+}
+
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+}
+
+// ── PROFILE UPDATE ──
+async function updateProfile(){
+  const name=document.getElementById('profileName').value.trim();
+  if(!name){showToast('Please enter a display name','error');return;}
+  const{error}=await sb.auth.updateUser({data:{full_name:name}});
+  if(error){showToast(error.message,'error');return;}
+  document.getElementById('sidebarName').textContent=name;
+  document.getElementById('sidebarAvatar').textContent=name[0].toUpperCase();
+  showToast('Profile updated successfully! ✓','success');
+}
+
+// ── CHANGE PASSWORD ──
+async function changePassword(){
+  const np=document.getElementById('newPass').value;
+  const cp=document.getElementById('confirmPass').value;
+  if(!np){showToast('Please enter a new password','error');return;}
+  if(np.length<8){showToast('Password must be at least 8 characters','error');return;}
+  if(np!==cp){showToast('Passwords do not match','error');return;}
+  const{error}=await sb.auth.updateUser({password:np});
+  if(error){showToast(error.message,'error');return;}
+  document.getElementById('newPass').value='';
+  document.getElementById('confirmPass').value='';
+  showToast('Password updated successfully! ✓','success');
+}
+
+// ── SIGN OUT ──
+function confirmSignOut(){
+  if(confirm('Are you sure you want to sign out?'))signOut();
+}
+async function signOut(){
+  await sb.auth.signOut();
+  window.location.href='/';
+}
+
+// ── DELETE ACCOUNT ──
+function showDeleteConfirm(){document.getElementById('deleteModal').classList.add('open');}
+function closeDeleteModal(){document.getElementById('deleteModal').classList.remove('open');document.getElementById('deleteConfirmInput').value='';}
+async function deleteAccount(){
+  const val=document.getElementById('deleteConfirmInput').value.trim();
+  if(val!=='DELETE'){showToast('Please type DELETE to confirm','error');return;}
+  const{error}=await sb.auth.admin?.deleteUser?.(currentUser.id).catch(()=>({error:true}))||{error:true};
+  await sb.auth.signOut();
+  localStorage.clear();
+  showToast('Account deleted. Redirecting...','success');
+  setTimeout(()=>window.location.href='/',2000);
+}
+
+// ── TOAST ──
+function showToast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast',3500);}
+
+init();
+</script>
+</body>
+</html>
