@@ -33,23 +33,18 @@ export default async function handler(req, res) {
 
 Provide 3 different paraphrased versions.
 
-Return your response in this exact JSON format (no markdown, no backticks):
-{
-  "variations": [
-    "first paraphrased version",
-    "second paraphrased version",
-    "third paraphrased version"
-  ]
-}
+IMPORTANT: Return ONLY a raw JSON object. No markdown, no backticks, no explanation. Just pure JSON.
 
-Text to paraphrase:
-${text}`
+Format: {"variations":["version 1 here","version 2 here","version 3 here"]}
+
+Text: ${text}`
         }]
       })
     });
 
     const data = await response.json();
-    const content = data.content[0].text;
+    let content = data.content[0].text.trim();
+    content = content.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '').trim();
 
     let result;
     try {
