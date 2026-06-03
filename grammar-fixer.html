@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar Fixer - ToneFixer | Fix Grammar & Spelling Instantly</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="description" content="Fix grammar, spelling, and punctuation errors instantly with AI. Free online grammar checker for emails, essays, and professional writing.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7993461749439016" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--accent:#059669;--accent2:#047857;--accent3:#ef4444;--text:#1e293b;--muted:#64748b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh}
+.btn{padding:.5rem 1.2rem;border-radius:8px;border:none;cursor:pointer;font-size:.9rem;font-weight:500;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
+.btn-ghost{background:transparent;color:var(--muted);border:1.5px solid var(--border)}
+.btn-ghost:hover{color:var(--text);border-color:var(--accent)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent2)}
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px;background:#fff;border-bottom:1px solid var(--border)}
+.logo{font-size:20px;font-weight:700;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.mobile-menu{position:fixed;inset:0;z-index:9999;background:#fff;display:flex;flex-direction:column;padding:0 24px;transform:translateX(100%);transition:transform .3s ease;overflow-y:auto}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu-header{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--border);margin-bottom:8px}
+.close-btn{background:none;border:1.5px solid var(--border);color:var(--text);width:38px;height:38px;border-radius:8px;cursor:pointer;font-size:1.5rem;display:flex;align-items:center;justify-content:center;line-height:1}
+.mobile-menu a{color:var(--muted);text-decoration:none;font-size:1.1rem;font-weight:500;padding:.9rem 0;border-bottom:1px solid var(--border);display:block;transition:color .2s}
+.mobile-menu a:hover{color:var(--accent)}
+.mobile-menu-btns{display:flex;flex-direction:column;gap:.75rem;margin-top:1.25rem}
+.mobile-menu-btns .btn{justify-content:center;padding:.85rem}
+.nav-links{display:none}
+.nav-right{display:none}
+@media(min-width:768px){
+  .nav-links{display:flex;align-items:center;gap:24px}
+  .nav-links a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active-link{color:var(--accent)}
+  .nav-right{display:flex;gap:10px;align-items:center}
+  .hamburger{display:none!important}
+}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
+.user-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:#fff;cursor:pointer;position:relative;user-select:none}
+.user-avatar.open .user-dropdown{display:block}
+.user-dropdown{position:absolute;top:42px;right:0;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:.5rem;min-width:180px;display:none;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.1)}
+.user-dropdown a,.user-dropdown button{display:block;width:100%;text-align:left;padding:.5rem .75rem;color:var(--text);text-decoration:none;border:none;background:none;cursor:pointer;font-size:.88rem;border-radius:6px}
+.user-dropdown a:hover,.user-dropdown button:hover{background:var(--bg);color:var(--accent)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%);padding:48px 24px 40px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.3);border-radius:100px;padding:.3rem .9rem;font-size:.8rem;color:var(--accent);margin-bottom:1rem}
+.hero h1{font-size:clamp(24px,5vw,42px);font-weight:800;color:#064e3b;margin-bottom:12px;line-height:1.2}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:16px;color:#065f46;max-width:520px;margin:0 auto;line-height:1.6}
+
+/* TOOL */
+.tool-section{max-width:900px;margin:0 auto;padding:40px 24px}
+.tool-card{background:#fff;border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.tool-header{background:var(--accent);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+.tool-header-left h2{color:#fff;font-size:17px;font-weight:600}
+.tool-header-left p{color:#a7f3d0;font-size:12px;margin-top:2px}
+.tool-header-right{display:flex;gap:.5rem}
+.tool-body{padding:1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.tool-body{grid-template-columns:1fr}}
+.tool-col label{display:block;font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem;font-weight:600}
+.tool-col textarea{width:100%;height:200px;background:#f8fafc;border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:.92rem;padding:.85rem;resize:none;line-height:1.7;transition:border-color .2s}
+.tool-col textarea:focus{outline:none;border-color:var(--accent);background:#fff}
+.output-area{width:100%;min-height:200px;background:#f0fdf4;border:1.5px solid #a7f3d0;border-radius:10px;padding:.85rem;font-size:.92rem;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-word}
+.output-placeholder{color:#94a3b8;font-style:italic;font-size:.88rem}
+.tool-footer{padding:.75rem 1.25rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;border-top:1px solid var(--border)}
+.char-count{font-size:.78rem;color:var(--muted)}
+.tool-actions{display:flex;gap:.6rem;align-items:center}
+.copy-btn{background:none;border:1.5px solid var(--border);color:var(--muted);border-radius:8px;padding:.4rem .75rem;cursor:pointer;font-size:.8rem;font-family:inherit;transition:all .2s}
+.copy-btn:hover{color:var(--accent);border-color:var(--accent)}
+.btn-fix{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:.6rem 1.5rem;cursor:pointer;font-weight:700;font-size:.9rem;transition:all .2s}
+.btn-fix:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-fix:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.loading-dots{display:inline-flex;gap:4px}
+.loading-dots span{width:5px;height:5px;border-radius:50%;background:#fff;animation:db 1.2s infinite}
+.loading-dots span:nth-child(2){animation-delay:.2s}
+.loading-dots span:nth-child(3){animation-delay:.4s}
+@keyframes db{0%,80%,100%{transform:scale(.8);opacity:.5}40%{transform:scale(1.2);opacity:1}}
+
+/* STATS */
+.corrections-box{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;margin-top:1rem;display:none}
+.corrections-box.show{display:block}
+.corrections-title{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
+.correction-item{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.84rem}
+.correction-item:last-child{border-bottom:none}
+.correction-item .badge{flex-shrink:0;padding:.15rem .5rem;border-radius:100px;font-size:.7rem;font-weight:600}
+.badge-grammar{background:#fef3c7;color:#92400e}
+.badge-spelling{background:#fee2e2;color:#991b1b}
+.badge-punctuation{background:#e0e7ff;color:#3730a3}
+.badge-style{background:#f0fdf4;color:#065f46;border:1px solid #a7f3d0}
+
+/* INFO CARDS */
+.info-section{max-width:900px;margin:0 auto;padding:0 24px 60px}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+.info-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:1.25rem}
+.info-card .icon{font-size:1.8rem;margin-bottom:.6rem}
+.info-card h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.info-card p{font-size:.82rem;color:var(--muted);line-height:1.6}
+
+/* OTHER TOOLS */
+.tools-section{background:#fff;border-top:1px solid var(--border);padding:48px 24px}
+.tools-inner{max-width:900px;margin:0 auto}
+.tools-title{font-size:1.3rem;font-weight:800;color:var(--text);margin-bottom:.4rem}
+.tools-sub{font-size:.88rem;color:var(--muted);margin-bottom:1.5rem}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem}
+.tool-link{background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;text-decoration:none;transition:all .2s;display:block}
+.tool-link:hover{border-color:var(--accent);background:#f0fdf4}
+.tool-link .tl-icon{font-size:1.5rem;margin-bottom:.5rem}
+.tool-link .tl-name{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
+.tool-link .tl-desc{font-size:.78rem;color:var(--muted)}
+
+.cta-section{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-top:1px solid #a7f3d0;padding:48px 24px;text-align:center}
+.cta-section h2{font-size:1.6rem;font-weight:800;color:#064e3b;margin-bottom:.6rem}
+.cta-section p{color:#065f46;margin-bottom:1.5rem;font-size:.95rem}
+.cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+
+footer{background:#0f172a;color:#94a3b8;padding:32px 24px;text-align:center}
+.foot-links{display:flex;justify-content:center;gap:20px;margin-bottom:12px;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:#64748b;text-decoration:none}
+.foot-links a:hover{color:#fff}
+.foot-copy{font-size:12px;color:#475569}
+
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#0f172a;color:#fff;border-radius:10px;padding:.7rem 1.1rem;font-size:.88rem;z-index:1001;transform:translateY(100px);opacity:0;transition:all .3s;max-width:280px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{background:var(--accent)}
+.toast.error{background:var(--accent3)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">✦ ToneFixer</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/features.html">Features</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/pricing.html">Pricing</a>
+  </div>
+  <div class="nav-right" id="navRight">
+    <button class="btn btn-ghost" onclick="openAuthModal('login')">Log in</button>
+    <button class="btn btn-primary" onclick="openAuthModal('signup')">Sign up free</button>
+  </div>
+  <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <a href="/" class="logo">✦ ToneFixer</a>
+    <button class="close-btn" onclick="closeMobileMenu()">×</button>
+  </div>
+  <a href="/">Home</a>
+  <a href="/features.html">Features</a>
+  <a href="/blog.html">Blog</a>
+  <a href="/faq.html">FAQ</a>
+  <a href="/pricing.html">Pricing</a>
+  <div class="mobile-menu-btns" id="mobileMenuBtns">
+    <button class="btn btn-ghost" onclick="openAuthModal('login');closeMobileMenu()">Log in</button>
+    <button class="btn btn-primary" onclick="openAuthModal('signup');closeMobileMenu()">Sign up free</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-badge">✦ AI-Powered Grammar Checker</div>
+  <h1>Fix Grammar &<br><span>Spelling Instantly</span></h1>
+  <p>Correct grammar, spelling, and punctuation errors in seconds. Works in any language — free to use.</p>
+</div>
+
+<div class="tool-section">
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-header-left">
+        <h2>✦ AI Grammar Fixer</h2>
+        <p>Paste your text and get it corrected instantly</p>
+      </div>
+    </div>
+    <div class="tool-body">
+      <div class="tool-col">
+        <label>Your Text</label>
+        <textarea id="inputText" placeholder="Paste your text here...&#10;&#10;Example: i went to the store yesterday and buyed some apple's and orange's"></textarea>
+      </div>
+      <div class="tool-col">
+        <label>Fixed Text ✓</label>
+        <div class="output-area" id="outputArea">
+          <span class="output-placeholder">Your corrected text will appear here...</span>
+        </div>
+      </div>
+    </div>
+    <div class="tool-footer">
+      <div class="char-count"><span id="charCount">0</span> characters</div>
+      <div class="tool-actions">
+        <button class="copy-btn" id="copyBtn" onclick="copyOutput()" style="display:none">📋 Copy</button>
+        <button class="btn-fix" id="fixBtn" onclick="fixGrammar()">Fix Grammar ✦</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="corrections-box" id="correctionsBox">
+    <div class="corrections-title">📋 What was fixed:</div>
+    <div id="correctionsList"></div>
+  </div>
+</div>
+
+<div class="info-section">
+  <div class="info-grid">
+    <div class="info-card"><div class="icon">✅</div><h3>Grammar Errors</h3><p>Fix subject-verb agreement, tense errors, article usage, and sentence structure.</p></div>
+    <div class="info-card"><div class="icon">🔤</div><h3>Spelling Mistakes</h3><p>Instantly correct misspelled words in English and 50+ other languages.</p></div>
+    <div class="info-card"><div class="icon">，</div><h3>Punctuation</h3><p>Fix missing commas, incorrect apostrophes, periods, and other punctuation.</p></div>
+    <div class="info-card"><div class="icon">✨</div><h3>Style & Clarity</h3><p>Improve sentence flow and make your writing clearer and more readable.</p></div>
+  </div>
+</div>
+
+<div class="tools-section">
+  <div class="tools-inner">
+    <div class="tools-title">More AI Writing Tools</div>
+    <div class="tools-sub">Everything you need to write better</div>
+    <div class="tools-grid">
+      <a href="/" class="tool-link"><div class="tl-icon">🎯</div><div class="tl-name">Tone Fixer</div><div class="tl-desc">Rewrite text in any tone</div></a>
+      <a href="/text-summarizer.html" class="tool-link"><div class="tl-icon">📝</div><div class="tl-name">Text Summarizer</div><div class="tl-desc">Summarize long text instantly</div></a>
+      <a href="/paraphraser.html" class="tool-link"><div class="tl-icon">🔄</div><div class="tl-name">Paraphraser</div><div class="tl-desc">Rewrite text differently</div></a>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>Write Without Errors</h2>
+  <p>Create a free account for 10 corrections/day — no credit card needed.</p>
+  <div class="cta-btns">
+    <button class="btn btn-primary" style="padding:.75rem 1.8rem;font-size:1rem;font-weight:700" onclick="openAuthModal('signup')">Sign Up Free →</button>
+    <a href="/pricing.html" class="btn btn-ghost" style="padding:.75rem 1.8rem;font-size:1rem;border-color:#a7f3d0;color:#065f46">See Pricing</a>
+  </div>
+</div>
+
+<footer>
+  <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:12px">✦ ToneFixer</div>
+  <div class="foot-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/privacy.html">Terms</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/blog.html">Blog</a>
+  </div>
+  <div class="foot-copy">© 2026 ToneFixer. All rights reserved.</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPABASE_URL='https://akijndyfjuumfeorqpko.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFraWpuZHlmanV1bWZlb3JxcGtvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzMDExNTUsImV4cCI6MjA5NTg3NzE1NX0.Sc4Qv-7m_Cmb3A2r2PMnzmnsKclu0XC6qxf0mVK7ZbA';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+let currentUser=null;
+let guestUsed=parseInt(localStorage.getItem('grammarGuestUsed')||'0');
+
+function openMobileMenu(){document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';}
+function toggleDropdown(el){el.classList.toggle('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('.user-avatar')){document.querySelectorAll('.user-avatar').forEach(a=>a.classList.remove('open'));}});
+
+document.getElementById('inputText').addEventListener('input',function(){
+  document.getElementById('charCount').textContent=this.value.length;
+});
+
+async function initAuth(){
+  const{data:{session}}=await sb.auth.getSession();
+  if(session)setUser(session.user);
+  sb.auth.onAuthStateChange((_,session)=>{
+    if(session){setUser(session.user);}
+    else{currentUser=null;renderNavGuest();}
+  });
+}
+function setUser(u){currentUser=u;renderNavUser(u);}
+function renderNavGuest(){
+  document.getElementById('navRight').innerHTML='<button class="btn btn-ghost" onclick="openAuthModal(\'login\')">Log in</button><button class="btn btn-primary" onclick="openAuthModal(\'signup\')">Sign up free</button>';
+  document.getElementById('mobileMenuBtns').innerHTML='<button class="btn btn-ghost" onclick="openAuthModal(\'login\');closeMobileMenu()">Log in</button><button class="btn btn-primary" onclick="openAuthModal(\'signup\');closeMobileMenu()">Sign up free</button>';
+}
+function renderNavUser(u){
+  const init=(u.user_metadata?.full_name||u.email||'U')[0].toUpperCase();
+  document.getElementById('navRight').innerHTML='<div class="user-avatar" onclick="toggleDropdown(this)">'+init+'<div class="user-dropdown"><a href="/dashboard.html">👤 My Dashboard</a><a href="/pricing.html">⭐ Upgrade to Pro</a><button onclick="signOut()">Sign out</button></div></div>';
+  document.getElementById('mobileMenuBtns').innerHTML='<a href="/dashboard.html" class="btn btn-ghost">👤 Dashboard</a><button class="btn btn-ghost" onclick="signOut();closeMobileMenu()">Sign out</button>';
+}
+async function signOut(){await sb.auth.signOut();showToast('Signed out');}
+function openAuthModal(mode){window.location.href='/?modal='+mode;}
+
+function canUse(){
+  if(!currentUser)return guestUsed<1;
+  const today=new Date().toDateString();
+  const d=JSON.parse(localStorage.getItem('tfUsage')||'{}');
+  const trialStart=d.trialStart?new Date(d.trialStart):null;
+  if(trialStart){const diff=Math.floor((new Date()-trialStart)/(1000*60*60*24));if(diff>=3)return false;}
+  const used=d.date===today?d.count||0:0;
+  return used<10;
+}
+
+async function fixGrammar(){
+  const text=document.getElementById('inputText').value.trim();
+  if(!text){showToast('Please enter some text first','error');return;}
+  if(!canUse()){showToast('Sign up free for more uses!','error');openAuthModal('signup');return;}
+
+  const btn=document.getElementById('fixBtn');
+  btn.disabled=true;
+  btn.innerHTML='<div class="loading-dots"><span></span><span></span><span></span></div>';
+  document.getElementById('outputArea').innerHTML='<span class="output-placeholder">Fixing grammar...</span>';
+  document.getElementById('correctionsBox').classList.remove('show');
+  document.getElementById('copyBtn').style.display='none';
+
+  try{
+    const response=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{
+          role:'user',
+          content:`Fix all grammar, spelling, and punctuation errors in the following text. 
+
+Return your response in this exact JSON format (no markdown, no backticks):
+{
+  "fixed": "the corrected text here",
+  "corrections": [
+    {"type": "grammar|spelling|punctuation|style", "original": "wrong text", "fixed": "correct text", "explanation": "brief explanation"}
+  ]
+}
+
+If the text has no errors, return the original text and an empty corrections array.
+
+Text to fix:
+${text}`
+        }]
+      })
+    });
+
+    const data=await response.json();
+    const content=data.content[0].text;
+    
+    let result;
+    try{
+      result=JSON.parse(content);
+    }catch(e){
+      // fallback if JSON parse fails
+      result={fixed:content,corrections:[]};
+    }
+
+    document.getElementById('outputArea').textContent=result.fixed||text;
+    document.getElementById('copyBtn').style.display='flex';
+
+    // Record usage
+    if(!currentUser){
+      guestUsed++;
+      localStorage.setItem('grammarGuestUsed',guestUsed);
+    } else {
+      const today=new Date().toDateString();
+      const d=JSON.parse(localStorage.getItem('tfUsage')||'{}');
+      if(!d.trialStart)d.trialStart=new Date().toISOString();
+      d.date=today;d.count=(d.date===today?d.count||0:0)+1;
+      localStorage.setItem('tfUsage',JSON.stringify(d));
+    }
+
+    // Show corrections
+    if(result.corrections&&result.corrections.length>0){
+      const box=document.getElementById('correctionsBox');
+      const list=document.getElementById('correctionsList');
+      const badgeMap={grammar:'badge-grammar',spelling:'badge-spelling',punctuation:'badge-punctuation',style:'badge-style'};
+      list.innerHTML=result.corrections.map(c=>`
+        <div class="correction-item">
+          <span class="badge ${badgeMap[c.type]||'badge-style'}">${c.type}</span>
+          <div><span style="text-decoration:line-through;color:#94a3b8">${c.original}</span> → <strong style="color:var(--accent)">${c.fixed}</strong><div style="font-size:.78rem;color:var(--muted);margin-top:2px">${c.explanation}</div></div>
+        </div>`).join('');
+      box.classList.add('show');
+    } else {
+      document.getElementById('correctionsBox').classList.remove('show');
+      if(result.fixed===text)showToast('✓ No errors found! Your text looks great.','success');
+      else showToast('✓ Text corrected!','success');
+    }
+
+  }catch(e){
+    document.getElementById('outputArea').innerHTML='<span class="output-placeholder">Something went wrong. Please try again.</span>';
+    showToast('Network error. Try again.','error');
+  }
+
+  btn.disabled=false;
+  btn.innerHTML='Fix Grammar ✦';
+}
+
+function copyOutput(){
+  const text=document.getElementById('outputArea').textContent;
+  if(!text||text.includes('will appear here')){showToast('Nothing to copy yet!','error');return;}
+  navigator.clipboard.writeText(text).then(()=>showToast('Copied! ✓','success'));
+}
+
+function showToast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast',3000);}
+
+initAuth();
+</script>
+</body>
+</html>
