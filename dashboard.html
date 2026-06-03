@@ -155,7 +155,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       <div class="page active" id="page-overview">
         <div class="stats-grid">
           <div class="stat-card green">
-            <div class="label">Rewrites Today</div>
+            <div class="label">Total Uses</div>
             <div class="value" id="usedToday">0</div>
             <div class="sub" id="usedSub">of 10 daily limit</div>
           </div>
@@ -196,10 +196,13 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
           <div class="card-title"><span class="icon">🚀</span> Quick Actions</div>
           <div style="display:flex;gap:.75rem;flex-wrap:wrap">
             <a href="/" class="btn btn-primary">✦ Tone Fixer</a>
-            <a href="/grammar-fixer.html" class="btn btn-ghost">✅ Grammar Fixer</a>
+            <a href="/grammar-fixer.html" class="btn btn-ghost">✅ Grammar</a>
             <a href="/text-summarizer.html" class="btn btn-ghost">📝 Summarizer</a>
             <a href="/paraphraser.html" class="btn btn-ghost">🔄 Paraphraser</a>
-            <button class="btn btn-ghost" onclick="showPage('profile')">👤 Edit Profile</button>
+            <a href="/email-subject-generator.html" class="btn btn-ghost">📧 Email Subject</a>
+            <a href="/cover-letter-writer.html" class="btn btn-ghost">💼 Cover Letter</a>
+            <a href="/social-media-caption.html" class="btn btn-ghost">📱 Caption</a>
+            <button class="btn btn-ghost" onclick="showPage('profile')">👤 Profile</button>
           </div>
         </div>
       </div>
@@ -242,27 +245,27 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
           </div>
         </div>
 
-        <div class="card" style="border-style:dashed;border-color:#a7f3d0;background:#f0fdf4">
-          <div class="card-title"><span class="icon">🔜</span> Coming Soon</div>
+        <div class="card">
+          <div class="card-title"><span class="icon">📨</span> Professional Writing Tools</div>
           <div class="ai-tools-grid">
-            <div class="ai-tool-card" style="opacity:.6;cursor:default">
+            <a href="/email-subject-generator.html" class="ai-tool-card">
               <div class="atc-icon">📧</div>
               <div class="atc-name">Email Subject Generator</div>
-              <div class="atc-desc">Generate perfect email subject lines</div>
-              <div class="atc-arrow" style="color:var(--muted)">Coming soon</div>
-            </div>
-            <div class="ai-tool-card" style="opacity:.6;cursor:default">
+              <div class="atc-desc">Generate subject lines that get opened</div>
+              <div class="atc-arrow">Use tool →</div>
+            </a>
+            <a href="/cover-letter-writer.html" class="ai-tool-card">
               <div class="atc-icon">💼</div>
               <div class="atc-name">Cover Letter Writer</div>
-              <div class="atc-desc">Write professional cover letters</div>
-              <div class="atc-arrow" style="color:var(--muted)">Coming soon</div>
-            </div>
-            <div class="ai-tool-card" style="opacity:.6;cursor:default">
+              <div class="atc-desc">Write professional cover letters fast</div>
+              <div class="atc-arrow">Use tool →</div>
+            </a>
+            <a href="/social-media-caption.html" class="ai-tool-card">
               <div class="atc-icon">📱</div>
               <div class="atc-name">Social Media Caption</div>
-              <div class="atc-desc">Create engaging social captions</div>
-              <div class="atc-arrow" style="color:var(--muted)">Coming soon</div>
-            </div>
+              <div class="atc-desc">Create engaging captions for any platform</div>
+              <div class="atc-arrow">Use tool →</div>
+            </a>
           </div>
         </div>
       </div>
@@ -313,14 +316,14 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
             <div>
               <div style="font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:.3rem">Free Trial</div>
-              <div style="font-size:.88rem;color:var(--muted)">10 rewrites/day for 3 days</div>
+              <div style="font-size:.88rem;color:var(--muted)">10 total uses over 3 days</div>
             </div>
             <span class="plan-badge free">Free</span>
           </div>
           <div class="divider"></div>
           <div style="font-size:.88rem;color:var(--muted);line-height:1.7">
             <div>✓ All AI writing tools</div>
-            <div>✓ 10 uses/day during trial</div>
+            <div>✓ 10 total uses during trial</div>
             <div>✓ All 8 tone styles</div>
             <div>✓ Any language</div>
           </div>
@@ -354,6 +357,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
           <div class="help-item"><a href="/grammar-fixer.html">✅ Use Grammar Fixer →</a><p>Fix grammar, spelling, and punctuation errors instantly</p></div>
           <div class="help-item"><a href="/text-summarizer.html">📝 Use Text Summarizer →</a><p>Summarize long articles and documents in seconds</p></div>
           <div class="help-item"><a href="/paraphraser.html">🔄 Use Paraphraser →</a><p>Rewrite text in 5 different modes</p></div>
+          <div class="help-item"><a href="/email-subject-generator.html">📧 Use Email Subject Generator →</a><p>Generate compelling email subject lines</p></div>
+          <div class="help-item"><a href="/cover-letter-writer.html">💼 Use Cover Letter Writer →</a><p>Write professional cover letters instantly</p></div>
+          <div class="help-item"><a href="/social-media-caption.html">📱 Use Social Media Caption Generator →</a><p>Create engaging captions for any platform</p></div>
           <div class="help-item"><a href="/features.html">⚡ View All Features →</a><p>Learn about all features and tools</p></div>
           <div class="help-item"><a href="/faq.html">❓ Frequently Asked Questions →</a><p>Answers to the most common questions</p></div>
         </div>
@@ -416,18 +422,18 @@ function loadUserData(){
   document.getElementById('profileJoined').value=new Date(u.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
 }
 function loadUsageData(){
-  const today=new Date().toDateString();
   const d=JSON.parse(localStorage.getItem('tfUsage')||'{}');
-  const used=d.date===today?d.count||0:0;
+  const totalUsed=d.totalCount||0;
   const trialStart=d.trialStart?new Date(d.trialStart):null;
   const daysUsed=trialStart?Math.floor((new Date()-trialStart)/(1000*60*60*24)):0;
   const daysLeft=Math.max(0,3-daysUsed);
-  document.getElementById('usedToday').textContent=used;
+  const rem=Math.max(0,10-totalUsed);
+  document.getElementById('usedToday').textContent=totalUsed;
   document.getElementById('daysLeft').textContent=daysLeft;
-  document.getElementById('usedSub').textContent='of 10 daily limit ('+(10-used>0?(10-used)+' remaining':'limit reached')+')';
-  document.getElementById('progressLabel').textContent=used+' / 10';
+  document.getElementById('usedSub').textContent='total uses ('+(rem>0?rem+' remaining':'limit reached')+')';
+  document.getElementById('progressLabel').textContent=totalUsed+' / 10';
   document.getElementById('trialLabel').textContent='Day '+daysUsed+' of 3';
-  const pct=Math.min(100,(used/10)*100);
+  const pct=Math.min(100,(totalUsed/10)*100);
   const bar=document.getElementById('progressFill');
   bar.style.width=pct+'%';
   bar.className='progress-fill'+(pct>=80?' danger':pct>=50?' warn':'');
