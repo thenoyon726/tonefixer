@@ -29,22 +29,20 @@ export default async function handler(req, res) {
           role: 'user',
           content: `${lengthInstructions[length] || lengthInstructions.short}
 
-Return your response in this exact JSON format (no markdown, no backticks):
-{
-  "summary": "your summary here",
-  "keypoints": ["point 1", "point 2", "point 3"]
-}
+IMPORTANT: Return ONLY a raw JSON object. No markdown, no backticks, no explanation. Just pure JSON.
 
-For short and medium summaries, keypoints can be an empty array.
+Format: {"summary":"summary text here","keypoints":["point1","point2"]}
 
-Text to summarize:
-${text}`
+For short/medium, keypoints can be empty array.
+
+Text: ${text}`
         }]
       })
     });
 
     const data = await response.json();
-    const content = data.content[0].text;
+    let content = data.content[0].text.trim();
+    content = content.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '').trim();
 
     let result;
     try {
