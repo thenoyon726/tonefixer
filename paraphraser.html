@@ -346,12 +346,7 @@ async function paraphrase(){
   try{
     const response=await fetch('/api/paraphrase',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,mode:selectedMode})});
 
-    const data=await response.json();
-    const content=data.content[0].text;
-
-    let result;
-    try{result=JSON.parse(content);}
-    catch(e){result={variations:[content]};}
+    const result=await response.json();
 
     // Show first variation in output
     const first=result.variations[0]||text;
