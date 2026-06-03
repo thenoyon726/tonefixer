@@ -23,24 +23,23 @@ export default async function handler(req, res) {
           role: 'user',
           content: `Fix all grammar, spelling, and punctuation errors in the following text.
 
-Return your response in this exact JSON format (no markdown, no backticks):
-{
-  "fixed": "the corrected text here",
-  "corrections": [
-    {"type": "grammar|spelling|punctuation|style", "original": "wrong text", "fixed": "correct text", "explanation": "brief explanation"}
-  ]
-}
+IMPORTANT: Return ONLY a raw JSON object. No markdown, no backticks, no explanation. Just pure JSON.
 
-If the text has no errors, return the original text and an empty corrections array.
+Format:
+{"fixed":"corrected text here","corrections":[{"type":"grammar","original":"wrong","fixed":"correct","explanation":"why"}]}
 
-Text to fix:
-${text}`
+If no errors found, return: {"fixed":"original text","corrections":[]}
+
+Text: ${text}`
         }]
       })
     });
 
     const data = await response.json();
-    const content = data.content[0].text;
+    let content = data.content[0].text.trim();
+    
+    // Strip markdown code blocks if present
+    content = content.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '').trim();
 
     let result;
     try {
