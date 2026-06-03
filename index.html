@@ -43,7 +43,7 @@ nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-con
 .hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
 .user-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:#fff;cursor:pointer;position:relative;user-select:none}
 .user-dropdown{position:absolute;top:42px;right:0;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:.5rem;min-width:180px;display:none;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.1)}
-.user-avatar:hover .user-dropdown{display:block}
+.user-avatar.open .user-dropdown{display:block}
 .user-dropdown a,.user-dropdown button{display:block;width:100%;text-align:left;padding:.5rem .75rem;color:var(--text);text-decoration:none;border:none;background:none;cursor:pointer;font-size:.88rem;border-radius:6px}
 .user-dropdown a:hover,.user-dropdown button:hover{background:var(--bg);color:var(--accent)}
 .hero{background:linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%);padding:60px 24px;text-align:center}
@@ -311,7 +311,7 @@ function renderNavGuest(){
 }
 function renderNavUser(u){
   const init=(u.user_metadata?.full_name||u.email||'U')[0].toUpperCase();
-  document.getElementById('navRight').innerHTML='<div class="user-avatar">'+init+'<div class="user-dropdown"><a href="/dashboard.html">👤 My Dashboard</a><a href="/pricing.html">⭐ Upgrade to Pro</a><button onclick="signOut()">Sign out</button></div></div>';
+  document.getElementById('navRight').innerHTML='<div class="user-avatar" onclick="toggleDropdown(this)">'+init+'<div class="user-dropdown"><a href="/dashboard.html">👤 My Dashboard</a><a href="/pricing.html">⭐ Upgrade to Pro</a><button onclick="signOut()">Sign out</button></div></div>';
   document.getElementById('mobileMenuBtns').innerHTML='<a href="/dashboard.html" class="btn btn-ghost">👤 Dashboard</a><button class="btn btn-ghost" onclick="signOut();closeMobileMenu()">Sign out</button>';
 }
 async function signOut(){await sb.auth.signOut();showToast('Signed out successfully');}
@@ -462,6 +462,8 @@ async function fixTone(){
 }
 function copyOutput(){const out=document.getElementById('outputText').value;if(!out){showToast('Nothing to copy yet!','error');return;}navigator.clipboard.writeText(out).then(()=>showToast('Copied! ✓','success'));}
 function showToast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast',3000);}
+function toggleDropdown(el){el.classList.toggle("open");}
+document.addEventListener("click",function(e){if(!e.target.closest(".user-avatar")){document.querySelectorAll(".user-avatar").forEach(a=>a.classList.remove("open"));}});
 initAuth();updateUsageBar();
 </script>
 </body>
