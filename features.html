@@ -79,6 +79,17 @@ nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-con
 .feat-small h4{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
 .feat-small p{color:var(--muted);font-size:.82rem;line-height:1.6}
 
+
+/* ALL TOOLS SECTION */
+.all-tools-section{max-width:960px;margin:0 auto;padding:0 1.5rem 3rem}
+.tools-grid-full{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.tool-card-link{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:1.25rem;text-decoration:none;transition:all .2s;display:block}
+.tool-card-link:hover{border-color:var(--accent);background:#f0fdf4;transform:translateY(-2px);box-shadow:0 6px 20px rgba(5,150,105,.1)}
+.tool-card-link .tc-icon{font-size:1.8rem;margin-bottom:.6rem}
+.tool-card-link .tc-name{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.tool-card-link .tc-desc{font-size:.8rem;color:var(--muted);line-height:1.5;margin-bottom:.5rem}
+.tool-card-link .tc-arrow{font-size:.78rem;color:var(--accent);font-weight:600}
+
 /* TONES */
 .tones-section{max-width:960px;margin:0 auto;padding:0 1.5rem 3rem}
 .tones-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
@@ -124,7 +135,6 @@ footer{background:#0f172a;color:#94a3b8;padding:32px 24px;text-align:center}
 <nav>
   <a href="/" class="logo">✦ ToneFixer</a>
   <div class="nav-links">
-    <a href="/">Home</a>
     <a href="/features.html" class="active-link">Features</a>
     <a href="/blog.html">Blog</a>
     <a href="/faq.html">FAQ</a>
@@ -144,7 +154,6 @@ footer{background:#0f172a;color:#94a3b8;padding:32px 24px;text-align:center}
     <a href="/" class="logo">✦ ToneFixer</a>
     <button class="close-btn" onclick="closeMobileMenu()">×</button>
   </div>
-  <a href="/">Home</a>
   <a href="/features.html">Features</a>
   <a href="/blog.html">Blog</a>
   <a href="/faq.html">FAQ</a>
@@ -178,6 +187,57 @@ footer{background:#0f172a;color:#94a3b8;padding:32px 24px;text-align:center}
     <div class="feat-small"><div class="feat-small-icon">🚀</div><h4>No Install Needed</h4><p>100% browser-based. No app to download, no software to install.</p></div>
     <div class="feat-small"><div class="feat-small-icon">✉️</div><h4>Email Optimized</h4><p>Specially trained on professional email patterns for natural rewrites.</p></div>
     <div class="feat-small"><div class="feat-small-icon">🔄</div><h4>Try Multiple Tones</h4><p>Switch between tones instantly to find the perfect voice for your message.</p></div>
+  </div>
+</div>
+
+
+<div class="all-tools-section">
+  <div class="section-label">All AI Tools</div>
+  <div class="section-title">7 Powerful Writing Tools</div>
+  <div class="section-sub">Everything you need to write better — all in one place</div>
+  <div class="tools-grid-full">
+    <a href="/" class="tool-card-link">
+      <div class="tc-icon">🎯</div>
+      <div class="tc-name">Tone Fixer</div>
+      <div class="tc-desc">Rewrite any text in 8 different tones — professional, friendly, formal, casual and more</div>
+      <div class="tc-arrow">Try free →</div>
+    </a>
+    <a href="/grammar-fixer.html" class="tool-card-link">
+      <div class="tc-icon">✅</div>
+      <div class="tc-name">Grammar Fixer</div>
+      <div class="tc-desc">Fix grammar, spelling, and punctuation errors instantly with AI</div>
+      <div class="tc-arrow">Try free →</div>
+    </a>
+    <a href="/text-summarizer.html" class="tool-card-link">
+      <div class="tc-icon">📝</div>
+      <div class="tc-name">Text Summarizer</div>
+      <div class="tc-desc">Summarize long articles, essays, and documents in seconds</div>
+      <div class="tc-arrow">Try free →</div>
+    </a>
+    <a href="/paraphraser.html" class="tool-card-link">
+      <div class="tc-icon">🔄</div>
+      <div class="tc-name">Paraphraser</div>
+      <div class="tc-desc">Rewrite text in your own words with 5 different modes</div>
+      <div class="tc-arrow">Try free →</div>
+    </a>
+    <a href="/email-subject-generator.html" class="tool-card-link">
+      <div class="tc-icon">📧</div>
+      <div class="tc-name">Email Subject Generator</div>
+      <div class="tc-desc">Generate compelling email subject lines that get opened</div>
+      <div class="tc-arrow">Try free →</div>
+    </a>
+    <a href="/cover-letter-writer.html" class="tool-card-link">
+      <div class="tc-icon">💼</div>
+      <div class="tc-name">Cover Letter Writer</div>
+      <div class="tc-desc">Write professional cover letters instantly and get hired faster</div>
+      <div class="tc-arrow">Try free →</div>
+    </a>
+    <a href="/social-media-caption.html" class="tool-card-link">
+      <div class="tc-icon">📱</div>
+      <div class="tc-name">Social Media Caption</div>
+      <div class="tc-desc">Generate engaging captions for Instagram, LinkedIn, Twitter and more</div>
+      <div class="tc-arrow">Try free →</div>
+    </a>
   </div>
 </div>
 
