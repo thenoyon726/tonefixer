@@ -339,12 +339,7 @@ async function summarize(){
   try{
     const response=await fetch('/api/summarize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,length:selectedLength})});
 
-    const data=await response.json();
-    const content=data.content[0].text;
-
-    let result;
-    try{result=JSON.parse(content);}
-    catch(e){result={summary:content,keypoints:[]};}
+    const result=await response.json();
 
     document.getElementById('outputArea').textContent=result.summary;
     document.getElementById('copyBtn').style.display='flex';
