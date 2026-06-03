@@ -310,16 +310,7 @@ async function fixGrammar(){
   try{
     const response=await fetch('/api/grammar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});
 
-    const data=await response.json();
-    const content=data.content[0].text;
-    
-    let result;
-    try{
-      result=JSON.parse(content);
-    }catch(e){
-      // fallback if JSON parse fails
-      result={fixed:content,corrections:[]};
-    }
+    const result=await response.json();
 
     document.getElementById('outputArea').textContent=result.fixed||text;
     document.getElementById('copyBtn').style.display='flex';
