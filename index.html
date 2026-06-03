@@ -188,14 +188,19 @@ footer{background:#0f172a;color:#94a3b8;padding:32px 24px;text-align:center}
     <button class="btn btn-primary" style="padding:.7rem 1.6rem;font-size:.95rem" onclick="document.querySelector('.tool-section').scrollIntoView({behavior:'smooth'})">Try It Free →</button>
     <button class="btn btn-ghost" style="padding:.7rem 1.4rem;font-size:.95rem;border-color:#a7f3d0;color:#065f46" onclick="openModal('signup')">Create Free Account</button>
   </div>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-bottom:.75rem">
+    <span style="background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.3);border-radius:100px;padding:.25rem .8rem;font-size:.78rem;color:#065f46">✅ 10 free uses</span>
+    <span style="background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.3);border-radius:100px;padding:.25rem .8rem;font-size:.78rem;color:#065f46">📅 3-day trial</span>
+    <span style="background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.3);border-radius:100px;padding:.25rem .8rem;font-size:.78rem;color:#065f46">💳 No credit card</span>
+  </div>
   <div class="usage-bar" id="usageBar">
     <div class="usage-dot" id="usageDot"></div>
-    <span id="usageText">Guest mode — 1 free try</span>
+    <span id="usageText">Guest mode · Sign up for 10 free uses!</span>
   </div>
 </section>
 
 <div class="limit-banner" id="limitBanner">
-  <p>🚀 <strong id="limitText">Sign up free</strong> — get 10 rewrites/day for 3 days!</p>
+  <p>🎉 <strong>Free Trial:</strong> Create a free account — get <strong id="limitText">10 uses over 3 days</strong>, no credit card needed!</p>
   <button class="btn btn-primary" onclick="openModal('signup')" style="flex-shrink:0;padding:.5rem 1.1rem">Sign Up Free →</button>
 </div>
 
@@ -305,17 +310,85 @@ function closeMobileMenu(){document.getElementById('mobileMenu').classList.remov
 function toggleDropdown(el){el.classList.toggle('open');}
 document.addEventListener('click',function(e){if(!e.target.closest('.user-avatar')){document.querySelectorAll('.user-avatar').forEach(a=>a.classList.remove('open'));}});
 
-function getUsageData(){const today=new Date().toDateString();const d=JSON.parse(localStorage.getItem('tfUsage')||'{}');if(d.date!==today)return{date:today,count:0,trialStart:d.trialStart||null};return d;}
+// ── NEW USAGE SYSTEM ──
+// Guest: 1 free try
+// Free account: 10 total uses within 3 days (not daily)
+// Pro: unlimited
+
+function getUsageData(){
+  const d=JSON.parse(localStorage.getItem('tfUsage')||'{}');
+  return d;
+}
 function saveUsageData(d){localStorage.setItem('tfUsage',JSON.stringify(d));}
-function getTrialDaysLeft(){const d=getUsageData();if(!d.trialStart)return 3;const diff=Math.floor((new Date()-new Date(d.trialStart))/(1000*60*60*24));return Math.max(0,3-diff);}
-function canUse(){if(!currentUser)return guestUsed<1;if(getTrialDaysLeft()<=0)return false;return getUsageData().count<10;}
-function recordUsage(){if(!currentUser){guestUsed++;localStorage.setItem('guestUsed',guestUsed);updateUsageBar();return;}let d=getUsageData();if(!d.trialStart)d.trialStart=new Date().toISOString();d.count=(d.count||0)+1;saveUsageData(d);updateUsageBar();}
+
+function getTrialDaysLeft(){
+  const d=getUsageData();
+  if(!d.trialStart)return 3;
+  const diff=Math.floor((new Date()-new Date(d.trialStart))/(1000*60*60*24));
+  return Math.max(0,3-diff);
+}
+
+function getTotalUsed(){
+  const d=getUsageData();
+  return d.totalCount||0;
+}
+
+function canUse(){
+  if(!currentUser)return guestUsed<1;
+  // Check 3 day limit
+  if(getTrialDaysLeft()<=0)return false;
+  // Check 10 total uses limit
+  if(getTotalUsed()>=10)return false;
+  return true;
+}
+
+function recordUsage(){
+  if(!currentUser){
+    guestUsed++;
+    localStorage.setItem('guestUsed',guestUsed);
+    updateUsageBar();
+    return;
+  }
+  const d=getUsageData();
+  if(!d.trialStart)d.trialStart=new Date().toISOString();
+  d.totalCount=(d.totalCount||0)+1;
+  saveUsageData(d);
+  updateUsageBar();
+}
+
 function updateUsageBar(){
   const text=document.getElementById('usageText'),dot=document.getElementById('usageDot'),banner=document.getElementById('limitBanner'),lt=document.getElementById('limitText');
-  if(!currentUser){if(guestUsed>=1){text.textContent='Sign up for 10 free uses/day';dot.className='usage-dot warn';banner.classList.add('show');lt.textContent="You've used your guest try.";}else{text.textContent='Guest mode — 1 free try';dot.className='usage-dot';banner.classList.remove('show');}return;}
-  const days=getTrialDaysLeft(),d=getUsageData(),rem=10-(d.count||0);
-  if(days<=0){text.textContent='Trial ended — Upgrade to Pro';dot.className='usage-dot danger';banner.classList.add('show');lt.textContent='Your free trial has ended.';}
-  else{text.textContent=rem+' uses left today · '+days+' day'+(days>1?'s':'')+' remaining';dot.className=rem<=3?'usage-dot warn':'usage-dot';if(rem>3)banner.classList.remove('show');}
+  if(!currentUser){
+    if(guestUsed>=1){
+      text.textContent='Sign up for 10 free uses';
+      dot.className='usage-dot warn';
+      banner.classList.add('show');
+      lt.textContent="You've used your guest try.";
+    }else{
+      text.textContent='Guest mode · Sign up for 10 free uses!';
+      dot.className='usage-dot';
+      banner.classList.remove('show');
+    }
+    return;
+  }
+  const days=getTrialDaysLeft();
+  const used=getTotalUsed();
+  const rem=10-used;
+  if(days<=0){
+    text.textContent='Trial ended — Upgrade to Pro';
+    dot.className='usage-dot danger';
+    banner.classList.add('show');
+    lt.textContent='Your free trial has ended.';
+  }else if(rem<=0){
+    text.textContent='10 uses reached — Upgrade to Pro';
+    dot.className='usage-dot danger';
+    banner.classList.add('show');
+    lt.textContent='You have used all 10 free uses.';
+  }else{
+    text.textContent=rem+' uses left · '+days+' day'+(days>1?'s':'')+' remaining';
+    dot.className=rem<=3?'usage-dot warn':'usage-dot';
+    if(rem>3)banner.classList.remove('show');
+  }
 }
 
 async function initAuth(){
