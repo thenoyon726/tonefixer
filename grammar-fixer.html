@@ -308,31 +308,7 @@ async function fixGrammar(){
   document.getElementById('copyBtn').style.display='none';
 
   try{
-    const response=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        messages:[{
-          role:'user',
-          content:`Fix all grammar, spelling, and punctuation errors in the following text. 
-
-Return your response in this exact JSON format (no markdown, no backticks):
-{
-  "fixed": "the corrected text here",
-  "corrections": [
-    {"type": "grammar|spelling|punctuation|style", "original": "wrong text", "fixed": "correct text", "explanation": "brief explanation"}
-  ]
-}
-
-If the text has no errors, return the original text and an empty corrections array.
-
-Text to fix:
-${text}`
-        }]
-      })
-    });
+    const response=await fetch('/api/grammar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});
 
     const data=await response.json();
     const content=data.content[0].text;
