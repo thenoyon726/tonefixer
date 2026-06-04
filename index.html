@@ -92,8 +92,6 @@ nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-con
 .stat{text-align:center}
 .stat-num{font-size:1.8rem;font-weight:800;color:var(--accent)}
 .stat-label{font-size:.82rem;color:#065f46;margin-top:.2rem}
-
-/* ── TOOLS SECTION ── */
 .tools-section{background:#fff;border-top:1px solid var(--border);padding:56px 24px}
 .tools-inner{max-width:900px;margin:0 auto}
 .tools-header{text-align:center;margin-bottom:2rem}
@@ -106,8 +104,6 @@ nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-con
 .tool-link-card .tlc-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
 .tool-link-card .tlc-desc{font-size:.82rem;color:var(--muted);line-height:1.5}
 .tool-link-card .tlc-arrow{font-size:.8rem;color:var(--accent);margin-top:.6rem;font-weight:600}
-
-/* ── MODAL ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s;overflow-y:auto}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:2rem;max-width:440px;width:100%;transform:scale(.95);transition:transform .2s;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.15);margin:auto}
@@ -251,7 +247,7 @@ footer{background:#0f172a;color:#94a3b8;padding:32px 24px;text-align:center}
 <div class="tools-section">
   <div class="tools-inner">
     <div class="tools-header">
-      <h2>6 More AI Writing Tools</h2>
+      <h2>9 More AI Writing Tools</h2>
       <p>Everything you need to write better — all free to try</p>
     </div>
     <div class="tools-grid">
@@ -291,6 +287,24 @@ footer{background:#0f172a;color:#94a3b8;padding:32px 24px;text-align:center}
         <div class="tlc-desc">Generate engaging captions for Instagram, LinkedIn, Twitter and more</div>
         <div class="tlc-arrow">Try it free →</div>
       </a>
+      <a href="/reply-suggester.html" class="tool-link-card">
+        <div class="tlc-icon">💬</div>
+        <div class="tlc-name">Reply Suggester</div>
+        <div class="tlc-desc">Generate smart reply options for any email or message instantly</div>
+        <div class="tlc-arrow">Try it free →</div>
+      </a>
+      <a href="/cold-email-writer.html" class="tool-link-card">
+        <div class="tlc-icon">📨</div>
+        <div class="tlc-name">Cold Email Writer</div>
+        <div class="tlc-desc">Write effective cold emails that actually get responses</div>
+        <div class="tlc-arrow">Try it free →</div>
+      </a>
+      <a href="/apology-writer.html" class="tool-link-card">
+        <div class="tlc-icon">🙏</div>
+        <div class="tlc-name">Apology Writer</div>
+        <div class="tlc-desc">Write sincere, heartfelt apology letters for any situation</div>
+        <div class="tlc-arrow">Try it free →</div>
+      </a>
     </div>
   </div>
 </div>
@@ -328,85 +342,26 @@ function closeMobileMenu(){document.getElementById('mobileMenu').classList.remov
 function toggleDropdown(el){el.classList.toggle('open');}
 document.addEventListener('click',function(e){if(!e.target.closest('.user-avatar')){document.querySelectorAll('.user-avatar').forEach(a=>a.classList.remove('open'));}});
 
-// ── NEW USAGE SYSTEM ──
-// Guest: 1 free try
-// Free account: 10 total uses within 3 days (not daily)
-// Pro: unlimited
-
-function getUsageData(){
-  const d=JSON.parse(localStorage.getItem('tfUsage')||'{}');
-  return d;
-}
+function getUsageData(){const d=JSON.parse(localStorage.getItem('tfUsage')||'{}');return d;}
 function saveUsageData(d){localStorage.setItem('tfUsage',JSON.stringify(d));}
-
-function getTrialDaysLeft(){
-  const d=getUsageData();
-  if(!d.trialStart)return 3;
-  const diff=Math.floor((new Date()-new Date(d.trialStart))/(1000*60*60*24));
-  return Math.max(0,3-diff);
-}
-
-function getTotalUsed(){
-  const d=getUsageData();
-  return d.totalCount||0;
-}
-
-function canUse(){
-  if(!currentUser)return guestUsed<1;
-  // Check 3 day limit
-  if(getTrialDaysLeft()<=0)return false;
-  // Check 10 total uses limit
-  if(getTotalUsed()>=10)return false;
-  return true;
-}
-
+function getTrialDaysLeft(){const d=getUsageData();if(!d.trialStart)return 3;const diff=Math.floor((new Date()-new Date(d.trialStart))/(1000*60*60*24));return Math.max(0,3-diff);}
+function getTotalUsed(){const d=getUsageData();return d.totalCount||0;}
+function canUse(){if(!currentUser)return guestUsed<1;if(getTrialDaysLeft()<=0)return false;if(getTotalUsed()>=10)return false;return true;}
 function recordUsage(){
-  if(!currentUser){
-    guestUsed++;
-    localStorage.setItem('guestUsed',guestUsed);
-    updateUsageBar();
-    return;
-  }
-  const d=getUsageData();
-  if(!d.trialStart)d.trialStart=new Date().toISOString();
-  d.totalCount=(d.totalCount||0)+1;
-  saveUsageData(d);
-  updateUsageBar();
+  if(!currentUser){guestUsed++;localStorage.setItem('guestUsed',guestUsed);updateUsageBar();return;}
+  const d=getUsageData();if(!d.trialStart)d.trialStart=new Date().toISOString();d.totalCount=(d.totalCount||0)+1;saveUsageData(d);updateUsageBar();
 }
-
 function updateUsageBar(){
   const text=document.getElementById('usageText'),dot=document.getElementById('usageDot'),banner=document.getElementById('limitBanner'),lt=document.getElementById('limitText');
   if(!currentUser){
-    if(guestUsed>=1){
-      text.textContent='Sign up for 10 free uses';
-      dot.className='usage-dot warn';
-      banner.classList.add('show');
-      lt.textContent="You've used your guest try.";
-    }else{
-      text.textContent='Guest mode · Sign up for 10 free uses!';
-      dot.className='usage-dot';
-      banner.classList.remove('show');
-    }
+    if(guestUsed>=1){text.textContent='Sign up for 10 free uses';dot.className='usage-dot warn';banner.classList.add('show');lt.textContent="You've used your guest try.";}
+    else{text.textContent='Guest mode · Sign up for 10 free uses!';dot.className='usage-dot';banner.classList.remove('show');}
     return;
   }
-  const days=getTrialDaysLeft();
-  const used=getTotalUsed();
-  const rem=10-used;
-  if(days<=0){
-    text.textContent='Trial ended — Upgrade to Pro';
-    dot.className='usage-dot danger';
-    banner.classList.add('show');
-    lt.textContent='Your free trial has ended.';
-  }else if(rem<=0){
-    text.textContent='10 uses reached — Upgrade to Pro';
-    dot.className='usage-dot danger';
-    banner.classList.add('show');
-    lt.textContent='You have used all 10 free uses.';
-  }else{
-    text.textContent=rem+' uses left · '+days+' day'+(days>1?'s':'')+' remaining';
-    dot.className=rem<=3?'usage-dot warn':'usage-dot';
-    if(rem>3)banner.classList.remove('show');
-  }
+  const days=getTrialDaysLeft(),used=getTotalUsed(),rem=10-used;
+  if(days<=0){text.textContent='Trial ended — Upgrade to Pro';dot.className='usage-dot danger';banner.classList.add('show');lt.textContent='Your free trial has ended.';}
+  else if(rem<=0){text.textContent='10 uses reached — Upgrade to Pro';dot.className='usage-dot danger';banner.classList.add('show');lt.textContent='You have used all 10 free uses.';}
+  else{text.textContent=rem+' uses left · '+days+' day'+(days>1?'s':'')+' remaining';dot.className=rem<=3?'usage-dot warn':'usage-dot';if(rem>3)banner.classList.remove('show');}
 }
 
 async function initAuth(){
